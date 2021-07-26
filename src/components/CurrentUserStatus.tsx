@@ -1,10 +1,9 @@
-import { Button, ButtonGroup, Container } from "@chakra-ui/react";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import React from "react";
 
 enum UserLoginStates {
   LOGGED, // shows hello message
   NOT_LOGGED, // shows buttons to ecourage user to sign up/in
-  CURRENTY_LOGGING, // empty container
 }
 
 interface Props {
@@ -12,6 +11,7 @@ interface Props {
 }
 
 export const CurrentUserStatus = (props: Props) => {
+  const noLoginStateDefined = "cannot define the login status of the user";
   if (props.userLoginState === UserLoginStates.NOT_LOGGED) {
     return (
       <ButtonGroup>
@@ -23,9 +23,7 @@ export const CurrentUserStatus = (props: Props) => {
     );
   } else if (props.userLoginState === UserLoginStates.LOGGED) {
     return <div></div>;
-  } else if (props.userLoginState === UserLoginStates.CURRENTY_LOGGING) {
-    return <div></div>;
-  } else throw "cannot define the login status of the user";
+  } else throw noLoginStateDefined;
 };
 
 CurrentUserStatus.defaultProps = {

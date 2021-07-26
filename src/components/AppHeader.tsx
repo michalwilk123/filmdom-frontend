@@ -25,7 +25,6 @@ export const AppHeader = () => {
       <HStack
         paddingX="7"
         alignContent="center"
-        templateColumns="repeat(5, 1fr)"
         width={{ base: "100vw", xl: "80vw" }}
         paddingY="2"
       >
@@ -36,8 +35,8 @@ export const AppHeader = () => {
         </Center>
         <Spacer />
         <HStack alignSelf="center" spacing="5">
-          <Button colorScheme="blackAlpha" paddingX="10">
-            Ranking filmów
+          <Button colorScheme="red" paddingX="10">
+            Movie Ranking
           </Button>
           <form onSubmit={handleSubmit}>
             <FormControl onSubmit={handleSubmit}>
