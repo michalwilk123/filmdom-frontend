@@ -3,7 +3,7 @@ import React from "react";
 import { LastCommentsFeed } from "./LastCommentsFeed";
 import { RandomMoviesFeed } from "./RandomMoviesFeed";
 
-export const AppBody = () => {
+export const HomePage = () => {
   return (
     <Grid
       templateColumns="repeat(6, 1fr)"
