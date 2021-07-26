@@ -8,7 +8,9 @@ export const AppFooter = () => {
         <VStack spacing="0">
           <Text as="b">Contact Info</Text>
           <HStack>
-            <Link color="blue.600" href="https://github.com/michalwilk123">Github</Link>
+            <Link color="blue.600" href="https://github.com/michalwilk123">
+              Github
+            </Link>
             <Link color="blue.600">Blog</Link>
           </HStack>
           <Text>

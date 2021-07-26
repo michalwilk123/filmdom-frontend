@@ -11,7 +11,7 @@ const testGenreList = [
   "science-fiction",
 ];
 
-export const MovieGenreSelector = (props:StackProps): ReactElement => {
+export const MovieGenreSelector = (props: StackProps): ReactElement => {
   const [genreList, setGenreList] = useState<string[]>(testGenreList);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ export const MovieGenreSelector = (props:StackProps): ReactElement => {
       })}
     </VStack>
   );
-}
+};

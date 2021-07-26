@@ -4,7 +4,7 @@ import { MovieListElement } from "../../utils/backendInterfaces";
 import { MovieCard } from "./MovieCard";
 import { MovieFilterFeed } from "./MovieFilterFeed";
 
-export const RankingPage = ():ReactElement => {
+export const RankingPage = (): ReactElement => {
   const [movieRanking, setMovieRanking] = useState<MovieListElement[]>([]);
 
   return (
@@ -13,12 +13,12 @@ export const RankingPage = ():ReactElement => {
       width={{ base: "100vw", md: "90vw", lg: "80vw", xl: "70vw" }}
       rounded="lg"
     >
-      <MovieFilterFeed rankingStateFunc={setMovieRanking}/>
+      <MovieFilterFeed rankingStateFunc={setMovieRanking} />
       <VStack>
-        {movieRanking.map((movie:MovieListElement) => {
-          <MovieCard movie={movie}/>
+        {movieRanking.map((movie: MovieListElement) => {
+          return <MovieCard movie={movie} />;
         })}
       </VStack>
     </Flex>
   );
-}
+};

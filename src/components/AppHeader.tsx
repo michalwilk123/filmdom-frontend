@@ -19,7 +19,7 @@ import { CurrentUserStatus } from "./CurrentUserStatus";
 export const AppHeader = () => {
   let history = useHistory();
 
-  // const handleRankingButtonClicked = 
+  // const handleRankingButtonClicked =
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -43,7 +43,11 @@ export const AppHeader = () => {
         </Center>
         <Spacer />
         <HStack alignSelf="center" spacing="5">
-          <Button colorScheme="red" paddingX="10" onClick={() => history.push("/ranking")}>
+          <Button
+            colorScheme="red"
+            paddingX="10"
+            onClick={() => history.push("/ranking")}
+          >
             Ranking
           </Button>
           <form onSubmit={handleSubmit}>

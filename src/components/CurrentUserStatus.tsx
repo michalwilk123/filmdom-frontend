@@ -18,10 +18,16 @@ export const CurrentUserStatus = (props: Props) => {
   if (props.userLoginState === UserLoginStates.NOT_LOGGED) {
     return (
       <ButtonGroup>
-        <Button variant="outline" bgColor="gray.200" onClick={() => history.push("/login")}>
+        <Button
+          variant="outline"
+          bgColor="gray.200"
+          onClick={() => history.push("/login")}
+        >
           Log in
         </Button>
-        <Button colorScheme="red"onClick={() => history.push("/register")}>Sign up</Button>
+        <Button colorScheme="red" onClick={() => history.push("/register")}>
+          Sign up
+        </Button>
       </ButtonGroup>
     );
   } else if (props.userLoginState === UserLoginStates.LOGGED) {

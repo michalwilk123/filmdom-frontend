@@ -9,7 +9,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
-import {MovieGenreSelector} from "./MovieGenreSelector";
+import { MovieGenreSelector } from "./MovieGenreSelector";
 
 export default function RegisterPage(): ReactElement {
   const [regiDataInvalid, setRegiDataInvalid] = useState(true);
