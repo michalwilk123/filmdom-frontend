@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/authorizationRelated/LoginPage";
 import RegisterPage from "./components/authorizationRelated/RegisterPage";
 import { HomePage } from "./components/HomePage";
-import RankingPage from "./components/ranking/RankingPage";
+import {RankingPage} from "./components/ranking/RankingPage";
 import PageNotFound from "./components/special/PageNotFound";
 
 export default function AppRouter() {
