@@ -38,7 +38,7 @@ export default function RegisterPage(): ReactElement {
 
   useEffect(() => {
     setPasswordExact(reapeatedPassw === passw);
-  }, [reapeatedPassw,passw]);
+  }, [reapeatedPassw, passw]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -69,17 +69,17 @@ export default function RegisterPage(): ReactElement {
               <Input id="username" type="text" isRequired />
             </Container>
             <Container px={0}>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  onChange={(e) => setPassw(inputFormDispatcher(e))}
-                  id="password"
-                  type="password"
-                  isRequired
-                />
-                <FormHelperText hidden={!regiDataInvalid} textColor="red.400">
-                  Password should have at least 8 characters and contain at
-                  least 2 non letter characters
-                </FormHelperText>
+              <FormLabel>Password</FormLabel>
+              <Input
+                onChange={(e) => setPassw(inputFormDispatcher(e))}
+                id="password"
+                type="password"
+                isRequired
+              />
+              <FormHelperText hidden={!regiDataInvalid} textColor="red.400">
+                Password should have at least 8 characters and contain at least
+                2 non letter characters
+              </FormHelperText>
             </Container>
             <Container px={0}>
               <FormLabel>Repeat Password</FormLabel>
@@ -89,7 +89,9 @@ export default function RegisterPage(): ReactElement {
                 type="password"
                 isRequired
               />
-              <FormHelperText hidden={passwordExact} textColor="red.400">Password are not the same</FormHelperText>
+              <FormHelperText hidden={passwordExact} textColor="red.400">
+                Password are not the same
+              </FormHelperText>
             </Container>
             <Container px={0} py={3}>
               <FormLabel fontSize="2xl" textAlign="center">
@@ -98,7 +100,7 @@ export default function RegisterPage(): ReactElement {
               <MovieGenreSelector />
             </Container>
             <Button
-              isDisabled={regiDataInvalid || (!passwordExact)}
+              isDisabled={regiDataInvalid || !passwordExact}
               type="submit"
               colorScheme="gray"
             >
