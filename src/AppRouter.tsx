@@ -1,9 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { AppBody } from "./components/AppBody";
+import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/authorizationRelated/LoginPage";
 import RegisterPage from "./components/authorizationRelated/RegisterPage";
+import { HomePage } from "./components/HomePage";
+import RankingPage from "./components/ranking/RankingPage";
 import PageNotFound from "./components/special/PageNotFound";
 
 export default function AppRouter() {
@@ -15,14 +16,13 @@ export default function AppRouter() {
       p="5"
       minHeight="700"
     >
-      <BrowserRouter>
-        <Switch>
-          <Route exact path={["/", "home"]} component={AppBody} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <Route path="/" component={PageNotFound} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path={["/", "/home"]} component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/ranking" component={RankingPage} />
+        <Route path="/" component={PageNotFound} />
+      </Switch>
     </Flex>
   );
 }
