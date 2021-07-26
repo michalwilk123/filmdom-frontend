@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import React from "react";
+import { useHistory } from "react-router";
 
 enum UserLoginStates {
   LOGGED, // shows hello message
@@ -12,13 +13,15 @@ interface Props {
 
 export const CurrentUserStatus = (props: Props) => {
   const noLoginStateDefined = "cannot define the login status of the user";
+  let history = useHistory();
+
   if (props.userLoginState === UserLoginStates.NOT_LOGGED) {
     return (
       <ButtonGroup>
-        <Button variant="outline" bgColor="gray.200">
+        <Button variant="outline" bgColor="gray.200" onClick={() => history.push("/login")}>
           Log in
         </Button>
-        <Button colorScheme="red">Sign in</Button>
+        <Button colorScheme="red"onClick={() => history.push("/register")}>Sign up</Button>
       </ButtonGroup>
     );
   } else if (props.userLoginState === UserLoginStates.LOGGED) {

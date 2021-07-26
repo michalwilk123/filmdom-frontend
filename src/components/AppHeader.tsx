@@ -9,12 +9,18 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  LinkBox,
   Spacer,
 } from "@chakra-ui/react";
 import React from "react";
+import { Link as ReactLink, useHistory } from "react-router-dom";
 import { CurrentUserStatus } from "./CurrentUserStatus";
 
 export const AppHeader = () => {
+  let history = useHistory();
+
+  // const handleRankingButtonClicked = 
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log("siema siema");
@@ -29,14 +35,16 @@ export const AppHeader = () => {
         paddingY="2"
       >
         <Center>
-          <Heading pt="2" pl="5" fontSize="4xl">
-            FilmDom
-          </Heading>
+          <LinkBox as={ReactLink} to="/home">
+            <Heading pt="2" pl="5" fontSize="4xl">
+              FilmDom
+            </Heading>
+          </LinkBox>
         </Center>
         <Spacer />
         <HStack alignSelf="center" spacing="5">
-          <Button colorScheme="red" paddingX="10">
-            Movie Ranking
+          <Button colorScheme="red" paddingX="10" onClick={() => history.push("/ranking")}>
+            Ranking
           </Button>
           <form onSubmit={handleSubmit}>
             <FormControl onSubmit={handleSubmit}>
