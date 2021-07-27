@@ -9,15 +9,6 @@ export interface MovieListElement {
   produceDate: string; // newest oldest
 }
 
-export interface MovieComment {
-  creatorId: number;
-  movieId: number;
-  username: string;
-  rating: number;
-  text: string | null;
-  publishDate: string;
-}
-
 export interface UserDtoData {
   username: string;
   creationDate: string;
@@ -29,4 +20,12 @@ export interface UserDtoData {
 
 export interface GenreInterface {
   name: string;
+}
+
+export interface MovieComment {
+  movieId:number;
+  text: string | null;
+  rating: number;
+  creator: string;
+  datePosted: string;
 }

@@ -97,7 +97,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
           </Text>
         </Box>
       </Flex>
-      <CommentModal isOpen={isOpen} onClose={onClose} />
+      <CommentModal isOpen={isOpen} onClose={onClose} filmId={props.movie.id}/>
     </>
   );
 };
