@@ -44,23 +44,20 @@ export const CommentModal = (props: Props) => {
   return (
     <Modal {...props} isCentered>
       <ModalOverlay />
-      <ModalContent bgColor="red.300">
-        <Box bgColor="white" m="5">
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+      <ModalContent bgColor="gray.100">
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalCloseButton />
+          <ModalBody rounded="md" bgColor="white" m="5">
             {commentList.map((comment) => 
               <MovieCommentElement {...comment}/>
             )}
           </ModalBody>
-
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={props.onClose}>
               Close
             </Button>
             <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
-        </Box>
       </ModalContent>
     </Modal>
   );

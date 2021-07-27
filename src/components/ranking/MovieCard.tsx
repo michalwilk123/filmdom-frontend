@@ -60,7 +60,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
         py="3"
         {...props}
         boxShadow="base"
-        bgColor="gray.200"
+        bgColor="gray.100"
         width="inherit"
         rounded="sm"
       >
@@ -68,11 +68,10 @@ export const MovieCard = (props: Props): React.ReactElement => {
         <Box
           alignItems="left"
           bgColor="white"
-          // width="1000px"
           width="100vw"
           px="5"
           py="4"
-          ml="2"
+          ml="3"
           rounded="sm"
         >
           <Text as="b" fontSize="2xl">
