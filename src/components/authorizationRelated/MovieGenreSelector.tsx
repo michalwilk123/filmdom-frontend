@@ -1,6 +1,6 @@
 import { Checkbox, HStack, StackProps, VStack } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
-import { arr_reshape } from "../../utils/other";
+import { arrReshape } from "../../utils/other";
 
 const testGenreList = [
   "horror",
@@ -11,7 +11,11 @@ const testGenreList = [
   "science-fiction",
 ];
 
-export const MovieGenreSelector = (props: StackProps): ReactElement => {
+interface Props extends StackProps {
+  cols:number;
+}
+
+export const MovieGenreSelector = (props: Props): ReactElement => {
   const [genreList, setGenreList] = useState<string[]>(testGenreList);
 
   useEffect(() => {
@@ -21,13 +25,16 @@ export const MovieGenreSelector = (props: StackProps): ReactElement => {
 
   return (
     <VStack {...props}>
-      {arr_reshape(genreList, 4).map((row: string[]) => {
+      {arrReshape(genreList, props.cols).map((row: string[]) => {
         // TODO: this breaks with long genre names and I
         // dont know how to solve it
+        // NOTE: WRAP. this would so much easier...
         return (
-          <HStack spacing="5">
+          <HStack key={row.toString()} spacing="5">
             {row.map((genreName) => (
-              <Checkbox id={genreName}>{genreName}</Checkbox>
+              <Checkbox id={genreName} key={genreName}>
+                {genreName}
+              </Checkbox>
             ))}
           </HStack>
         );

@@ -9,6 +9,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
+import { useWindowDimensions } from "../../utils/responsiveUtils";
 import { MovieGenreSelector } from "./MovieGenreSelector";
 
 export default function RegisterPage(): ReactElement {
@@ -16,6 +17,7 @@ export default function RegisterPage(): ReactElement {
   const [passwordExact, setPasswordExact] = useState(true);
   const [passw, setPassw] = useState("");
   const [reapeatedPassw, setReapeatedPassw] = useState("");
+  let {width} = useWindowDimensions();
 
   useEffect(() => {
     if (passw.length < 8) {
@@ -51,22 +53,30 @@ export default function RegisterPage(): ReactElement {
     return e.target.value;
   };
 
+  const calculateColGenres = ():number => {
+    return width > 900 ? 5 : (
+      width > 700 ? 4 : (
+        width > 600 ? 3 : 2
+      )
+    )
+  };
+
   return (
     <Flex
-      width={{ base: "60vw", lg: "40vw", xl: "30vw" }}
+      width={{ base: "80vw", lg: "50vw", xl: "40vw", md: "70vw"}}
       bgColor="white"
       rounded="lg"
     >
       <form onSubmit={handleSubmit} style={{ width: "inherit" }}>
         <FormControl px={8} py={5}>
-          <VStack align="left" spacing="4">
+          <VStack justifyContent="center" spacing="4">
             <Container px={0}>
               <FormLabel width="inherit">Username</FormLabel>
               <Input id="username" type="text" isRequired />
             </Container>
             <Container px={0}>
               <FormLabel>Email</FormLabel>
-              <Input id="username" type="text" isRequired />
+              <Input id="mail" type="text" isRequired />
             </Container>
             <Container px={0}>
               <FormLabel>Password</FormLabel>
@@ -97,7 +107,7 @@ export default function RegisterPage(): ReactElement {
               <FormLabel fontSize="2xl" textAlign="center">
                 Select your favourite genres
               </FormLabel>
-              <MovieGenreSelector />
+              <MovieGenreSelector cols={calculateColGenres()} />
             </Container>
             <Button
               isDisabled={regiDataInvalid || !passwordExact}
