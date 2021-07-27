@@ -23,7 +23,7 @@ export interface GenreInterface {
 }
 
 export interface MovieComment {
-  movieId:number;
+  movieId: number;
   text: string | null;
   rating: number;
   creator: string;
