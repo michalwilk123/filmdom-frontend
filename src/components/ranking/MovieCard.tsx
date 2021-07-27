@@ -13,7 +13,6 @@ interface Props extends FlexProps {
 }
 
 export const MovieCard = (props: Props): React.ReactElement => {
-
   const getThumbnail = (): React.ReactElement => {
     if (!props.showthumbnail) {
       return <></>;

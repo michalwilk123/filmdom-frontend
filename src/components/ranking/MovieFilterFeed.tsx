@@ -1,9 +1,4 @@
-import {
-  Flex,
-  Heading,
-  Select,
-  Spacer,
-} from "@chakra-ui/react";
+import { Flex, Heading, Select, Spacer } from "@chakra-ui/react";
 import React, { ReactElement, useEffect } from "react";
 import { MovieListElement } from "../../utils/backendInterfaces";
 import { MovieSortMethods } from "../../utils/commonIterfaces";
@@ -58,7 +53,7 @@ interface Props {
 export const MovieFilterFeed = (props: Props): ReactElement => {
   useEffect(() => {
     handleRankingListRequest();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRankingListRequest = (

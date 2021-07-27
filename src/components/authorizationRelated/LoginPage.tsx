@@ -11,7 +11,7 @@ export default function LoginPage(): ReactElement {
 
   return (
     <Flex
-      width={{ base: "80vw", lg: "50vw", xl: "40vw", md: "70vw"}}
+      width={{ base: "80vw", lg: "50vw", xl: "40vw", md: "70vw" }}
       bgColor="white"
       rounded="lg"
     >

@@ -17,7 +17,7 @@ export default function RegisterPage(): ReactElement {
   const [passwordExact, setPasswordExact] = useState(true);
   const [passw, setPassw] = useState("");
   const [reapeatedPassw, setReapeatedPassw] = useState("");
-  let {width} = useWindowDimensions();
+  let { width } = useWindowDimensions();
 
   useEffect(() => {
     if (passw.length < 8) {
@@ -53,17 +53,13 @@ export default function RegisterPage(): ReactElement {
     return e.target.value;
   };
 
-  const calculateColGenres = ():number => {
-    return width > 900 ? 5 : (
-      width > 700 ? 4 : (
-        width > 600 ? 3 : 2
-      )
-    )
+  const calculateColGenres = (): number => {
+    return width > 900 ? 5 : width > 700 ? 4 : width > 600 ? 3 : 2;
   };
 
   return (
     <Flex
-      width={{ base: "80vw", lg: "50vw", xl: "40vw", md: "70vw"}}
+      width={{ base: "80vw", lg: "50vw", xl: "40vw", md: "70vw" }}
       bgColor="white"
       rounded="lg"
     >

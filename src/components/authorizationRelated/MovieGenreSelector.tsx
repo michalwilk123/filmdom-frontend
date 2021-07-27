@@ -12,7 +12,7 @@ const testGenreList = [
 ];
 
 interface Props extends StackProps {
-  cols:number;
+  cols: number;
 }
 
 export const MovieGenreSelector = (props: Props): ReactElement => {
