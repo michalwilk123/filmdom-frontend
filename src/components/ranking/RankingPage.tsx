@@ -9,6 +9,10 @@ export const RankingPage = (): ReactElement => {
   const [movieRanking, setMovieRanking] = useState<MovieListElement[]>([]);
   const { width } = useWindowDimensions();
 
+  const isThumbnailShown = (): boolean => {
+    return width > 1200;
+  };
+
   return (
     <Flex
       bgColor="white"
@@ -22,9 +26,10 @@ export const RankingPage = (): ReactElement => {
           {movieRanking.map((movie: MovieListElement) => {
             return (
               <MovieCard
-                showthumbnail={true && width > 1200}
+                showthumbnail={isThumbnailShown()}
                 movie={movie}
                 key={movie.id.toString()}
+                isUserLogged={true}
               />
             );
           })}

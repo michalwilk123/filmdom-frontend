@@ -82,7 +82,7 @@ export const MovieFilterFeed = (props: Props): ReactElement => {
         width="250px"
       >
         {Object.values(MovieSortMethods).map((method) => (
-          <option>{method}</option>
+          <option key={method}>{method}</option>
         ))}
       </Select>
     </Flex>
