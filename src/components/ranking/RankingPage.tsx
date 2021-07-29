@@ -26,10 +26,12 @@ export const RankingPage = (): ReactElement => {
           {movieRanking.map((movie: MovieListElement) => {
             return (
               <MovieCard
-                showthumbnail={isThumbnailShown()}
                 movie={movie}
                 key={movie.id.toString()}
-                isUserLogged={true}
+                args = {{
+                  showthumbnail:isThumbnailShown(),
+                  isuserlogged:true
+                }}
               />
             );
           })}

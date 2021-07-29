@@ -19,7 +19,7 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { UserAuthSingature } from "../../utils/backendInterfaces";
 import { StarsRatingComponent } from "../special/StarsRatingComponent";
 
@@ -28,6 +28,7 @@ interface Props extends UseModalProps {
 }
 
 export const AddMovieCommentModal = (props: Props) => {
+  const [currentRating, setCurrentRating] = useState<number|null>(null)
   return (
     <Modal {...props} isCentered scrollBehavior="inside">
       <ModalOverlay />
@@ -43,18 +44,18 @@ export const AddMovieCommentModal = (props: Props) => {
           py="0"
         >
           <Flex py="2" px="6">
-            {/* <Text>
-              Rating:
-            </Text> */}
             <Box mr="3">
               <Text as="b">Rating: </Text>
             </Box>
             <StarsRatingComponent
               maxRating={5}
-              onRatingSelect={(r) => {
-                console.log("rating: " + r);
-              }}
+              onRatingSelect={(r) => {setCurrentRating(r)}}
             />
+            <Box ml="3">
+              <Text as="i" fontSize="sm">
+                {currentRating === null ? "" : ` ${currentRating} `}
+              </Text>
+            </Box>
           </Flex>
           <Accordion allowMultiple mb="3" mx="2">
             <AccordionItem>

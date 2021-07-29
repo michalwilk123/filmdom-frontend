@@ -8,7 +8,7 @@ import {
   UseModalProps,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { MovieComment } from "../../utils/backendInterfaces";
+import {MovieComment} from "../../utils/backendInterfaces";
 import { MovieCommentElement } from "./MovieCommentElement";
 
 const test_comments: MovieComment[] = [
@@ -71,8 +71,8 @@ export const CommentModal = (props: Props) => {
           px="2"
           py="0"
         >
-          {commentList.map((comment) => (
-            <MovieCommentElement {...comment} />
+          {commentList.map((comment:MovieComment, index:number) => (
+            <MovieCommentElement {...comment} key={index}/>
           ))}
         </ModalBody>
       </ModalContent>
