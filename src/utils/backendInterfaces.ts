@@ -29,3 +29,7 @@ export interface MovieComment {
   creator: string;
   datePosted: string;
 }
+
+export interface UserAuthSingature {
+  username: string;
+}

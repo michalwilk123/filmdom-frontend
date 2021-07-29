@@ -1,10 +1,8 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   UseModalProps,
@@ -29,6 +27,13 @@ const test_comments: MovieComment[] = [
     movieId: 2,
   },
   {
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu ullamcorper dui. Maecenas commodo orci et iaculis dapibus. Mauris eleifend malesuada sollicitudin. Aliquam ac feugiat mi. Aenean massa felis, pulvinar eget nulla et, luctus facilisis nisi. In hac habitasse platea dictumst. Etiam suscipit est arcu, in finibus orci semper nec. Duis vitae ipsum metus. Nullam in tellus congue, rutrum ex nec, aliquet mi. Suspendisse pellentesque lobortis ipsum eu imperdiet. In luctus justo tortor, nec accumsan risus aliquam a. Mauris non accumsan lorem. ",
+    rating: 3,
+    creator: "Lorem Ipsum",
+    datePosted: "02-02-2021",
+    movieId: 1,
+  },
+  {
     text: null,
     rating: 1,
     creator: "anonim",
@@ -38,7 +43,9 @@ const test_comments: MovieComment[] = [
 ];
 
 interface Props extends UseModalProps {
-  filmId: number;
+  movieId: number;
+  movieTitle?: string;
+  avgRating?: number;
 }
 
 export const CommentModal = (props: Props) => {
@@ -50,22 +57,24 @@ export const CommentModal = (props: Props) => {
   }, []);
 
   return (
-    <Modal {...props} isCentered>
+    <Modal {...props} isCentered scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent bgColor="gray.100">
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader fontSize="lg">Comments {props.movieTitle}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody rounded="md" bgColor="white" m="5">
+        <ModalBody
+          rounded="md"
+          bgColor="white"
+          mx="4"
+          maxH="60vh"
+          mb="5"
+          px="2"
+          py="0"
+        >
           {commentList.map((comment) => (
             <MovieCommentElement {...comment} />
           ))}
         </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={props.onClose}>
-            Close
-          </Button>
-          <Button variant="ghost">Secondary Action</Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
