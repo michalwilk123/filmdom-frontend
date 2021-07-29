@@ -1,4 +1,4 @@
-enum STAR_VALUES {
+export enum STAR_VALUES {
   FULL = "★",
   HALF = "⯪", // this icon does not has the same size as the others
   EMPTY = "☆",
