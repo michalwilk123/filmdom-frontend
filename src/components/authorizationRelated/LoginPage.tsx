@@ -6,6 +6,7 @@ import React, { ReactElement } from "react";
 export default function LoginPage(): ReactElement {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // NOTE: Connecting to the api! Retrieving session token
     console.log("im am logging in");
   };
 

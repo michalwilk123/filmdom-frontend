@@ -43,6 +43,7 @@ const testFilmList: MovieListElement[] = [
 ];
 
 const fetchRanking = (): MovieListElement[] => {
+  // NOTE: fetching data from the api!
   return testFilmList;
 };
 

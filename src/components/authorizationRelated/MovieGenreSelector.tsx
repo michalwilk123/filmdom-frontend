@@ -19,7 +19,7 @@ export const MovieGenreSelector = (props: Props): ReactElement => {
   const [genreList, setGenreList] = useState<string[]>(testGenreList);
 
   useEffect(() => {
-    // TODO: Should fetch here genre data
+    // NOTE: Should fetch here genre data
     setGenreList(testGenreList);
   }, []);
 

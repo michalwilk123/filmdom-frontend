@@ -53,7 +53,7 @@ export const CommentModal = (props: Props) => {
   const [commentList, setCommentList] = useState<MovieComment[]>([]);
 
   useEffect(() => {
-    // ... fetching comments from the movie
+    // NOTE: fetching comments from the movie
     setCommentList(test_comments);
   }, []);
 

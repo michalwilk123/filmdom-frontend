@@ -21,7 +21,8 @@ import { CurrentUserStatus } from "./CurrentUserStatus";
 
 const handleSubmit = (e: React.SyntheticEvent) => {
   e.preventDefault();
-  console.log("siema siema");
+  // NOTE: fetching data from the api
+  console.log("looking from actor/movie/director");
 };
 
 interface HeaderVariantsProps{

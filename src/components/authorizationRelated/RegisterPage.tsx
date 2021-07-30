@@ -44,6 +44,7 @@ export default function RegisterPage(): ReactElement {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // NOTE: sending post data to the api
     console.log("i am registering");
   };
 
