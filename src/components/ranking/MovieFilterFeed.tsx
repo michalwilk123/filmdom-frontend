@@ -3,8 +3,8 @@ import React, { ReactElement, useEffect } from "react";
 import { MovieListElement } from "../../utils/backendInterfaces";
 import { MovieSortMethods } from "../../utils/commonIterfaces";
 
-/* NOTE: I chose that we really like the user and sort and filter the data
- * in  backend. I do not know if this approach is correct. We can save up some
+/* NOTE: I chose that we really like the user resources and sort, filter the data
+ * in backend. I do not know if this approach is correct. We can save up some
  * cpu time on backend if we leave the data unsorted
  */
 

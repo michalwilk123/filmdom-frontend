@@ -18,13 +18,13 @@ const NULL_MOVIE_URL =
   "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
 interface Props extends FlexProps {
-  args:ComponentProps;
+  args: ComponentProps;
   movie: MovieListElement;
 }
 
 interface ComponentProps {
   showthumbnail?: boolean;
-  isuserlogged?: boolean
+  isuserlogged?: boolean;
 }
 
 export const MovieCard = (props: Props): React.ReactElement => {
@@ -67,11 +67,11 @@ export const MovieCard = (props: Props): React.ReactElement => {
       <Flex
         px="3"
         py="3"
-        {...(props)}
-        boxShadow="base"
-        bgColor="gray.100"
-        width="inherit"
-        rounded="sm"
+        // boxShadow="base"
+        // bgColor="gray.100"
+        // width="inherit"
+        // rounded="sm"
+        {...props}
       >
         {getThumbnail()}
         <Box

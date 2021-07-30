@@ -28,9 +28,9 @@ export const RankingPage = (): ReactElement => {
               <MovieCard
                 movie={movie}
                 key={movie.id.toString()}
-                args = {{
-                  showthumbnail:isThumbnailShown(),
-                  isuserlogged:true
+                args={{
+                  showthumbnail: isThumbnailShown(),
+                  isuserlogged: true,
                 }}
               />
             );

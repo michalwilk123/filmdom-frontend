@@ -28,14 +28,14 @@ interface Props extends UseModalProps {
 }
 
 export const AddMovieCommentModal = (props: Props) => {
-  const [currentRating, setCurrentRating] = useState<number|null>(null)
+  const [currentRating, setCurrentRating] = useState<number | null>(null);
   const [additText, setAdditText] = useState("");
-  const [isTryingToSubmit, setIsTryingToSubmit] = useState(false)
+  const [isTryingToSubmit, setIsTryingToSubmit] = useState(false);
 
   const createComment = () => {
     alert(`SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`);
     setIsTryingToSubmit(true);
-    if (currentRating){
+    if (currentRating) {
       props.onClose();
     }
   };
@@ -60,11 +60,21 @@ export const AddMovieCommentModal = (props: Props) => {
             </Box>
             <StarsRatingComponent
               maxRating={5}
-              onRatingSelect={(r) => {setCurrentRating(r)}}
+              onRatingSelect={(r) => {
+                setCurrentRating(r);
+              }}
             />
             <Box ml="3">
               <Text as="i" fontSize="sm">
-                {currentRating !== null ? ` ${currentRating} ` : (isTryingToSubmit ? (<Text pt="2px" color="red">The rating must be set!</Text>) : "")}
+                {currentRating !== null ? (
+                  ` ${currentRating} `
+                ) : isTryingToSubmit ? (
+                  <Text pt="2px" color="red">
+                    The rating must be set!
+                  </Text>
+                ) : (
+                  ""
+                )}
               </Text>
             </Box>
           </Flex>
@@ -79,18 +89,25 @@ export const AddMovieCommentModal = (props: Props) => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                <Textarea onKeyPress={e=>{
-                  if((window.event as KeyboardEvent).key === "Enter"){
-                    createComment();
-                  }
-                }} onChange={e=>setAdditText(e.target.value)} placeholder="Write your comment" defaultValue={""} />
+                <Textarea
+                  onKeyPress={(e) => {
+                    if ((window.event as KeyboardEvent).key === "Enter") {
+                      createComment();
+                    }
+                  }}
+                  onChange={(e) => setAdditText(e.target.value)}
+                  placeholder="Write your comment"
+                  defaultValue={""}
+                />
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
         </ModalBody>
         <ModalFooter>
           <ButtonGroup>
-            <Button onClick={createComment} colorScheme="red">Add Comment</Button>
+            <Button onClick={createComment} colorScheme="red">
+              Add Comment
+            </Button>
             <Button
               colorScheme="red"
               variant="outline"
