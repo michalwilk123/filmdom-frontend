@@ -46,7 +46,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
 
     return (
       <Image
-        boxSize={{ base: "10vw", lg: "15vw" }}
+        height="inherit"
         src={imgSrc}
         fallbackSrc={NULL_MOVIE_URL}
         alt={props.movie.title + " thumbnail"}
@@ -65,22 +65,17 @@ export const MovieCard = (props: Props): React.ReactElement => {
   return (
     <>
       <Flex
-        px="3"
-        py="3"
-        // boxShadow="base"
-        // bgColor="gray.100"
-        // width="inherit"
-        // rounded="sm"
         {...props}
+        maxH="300px"
       >
         {getThumbnail()}
         <Box
           alignItems="left"
           bgColor="white"
-          width="100vw"
+          width="100%"
           px="5"
           py="4"
-          ml="3"
+          ml={props.args.showthumbnail ? "3" : "0"}
           rounded="sm"
         >
           <Text as="b" fontSize="2xl">
