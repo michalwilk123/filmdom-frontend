@@ -10,11 +10,11 @@ import PageNotFound from "./components/special/PageNotFound";
 export default function AppRouter() {
   return (
     <Flex
-      width="100vw"
+      width="100%"
       bgColor="gray.100"
       justifyContent="center"
       p="5"
-      minHeight="700"
+      minHeight="700px"
     >
       <Switch>
         <Route exact path={["/", "/home"]} component={HomePage} />

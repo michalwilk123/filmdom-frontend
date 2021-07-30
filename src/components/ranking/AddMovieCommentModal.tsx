@@ -33,7 +33,7 @@ export const AddMovieCommentModal = (props: Props) => {
   const [isTryingToSubmit, setIsTryingToSubmit] = useState(false);
 
   const createComment = () => {
-    alert(`SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`);
+    console.log(`SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`);
     setIsTryingToSubmit(true);
     if (currentRating) {
       props.onClose();
@@ -98,6 +98,7 @@ export const AddMovieCommentModal = (props: Props) => {
                   onChange={(e) => setAdditText(e.target.value)}
                   placeholder="Write your comment"
                   defaultValue={""}
+                  minHeight="200px"
                 />
               </AccordionPanel>
             </AccordionItem>

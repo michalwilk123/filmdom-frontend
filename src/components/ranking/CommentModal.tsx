@@ -1,4 +1,5 @@
 import {
+  Divider,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -57,9 +58,9 @@ export const CommentModal = (props: Props) => {
   }, []);
 
   return (
-    <Modal {...props} isCentered scrollBehavior="inside">
+    <Modal {...props} isCentered scrollBehavior="inside" >
       <ModalOverlay />
-      <ModalContent bgColor="gray.100">
+      <ModalContent bgColor="gray.100" minWidth="700px">
         <ModalHeader fontSize="lg">Comments {props.movieTitle}</ModalHeader>
         <ModalCloseButton />
         <ModalBody
@@ -72,7 +73,10 @@ export const CommentModal = (props: Props) => {
           py="0"
         >
           {commentList.map((comment: MovieComment, index: number) => (
-            <MovieCommentElement comment={comment} key={index} />
+            <>
+              <MovieCommentElement comment={comment} key={index} />
+              <Divider borderColor="grey.300" />
+            </>
           ))}
         </ModalBody>
       </ModalContent>

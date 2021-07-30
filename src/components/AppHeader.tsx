@@ -1,8 +1,8 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Center,
-  Flex,
   FormControl,
   Heading,
   HStack,
@@ -19,19 +19,17 @@ import { CurrentUserStatus } from "./CurrentUserStatus";
 export const AppHeader = () => {
   let history = useHistory();
 
-  // const handleRankingButtonClicked =
-
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log("siema siema");
   };
 
   return (
-    <Flex bgColor="red.300" width="100vw" height="80px">
+    <Box bgColor="red.300" height="80px" width="100%">
       <HStack
         paddingX="7"
         alignContent="center"
-        width={{ base: "100vw", xl: "80vw" }}
+        width={{ base: "100%", xl: "80%" }}
         paddingY="2"
       >
         <Center>
@@ -70,6 +68,6 @@ export const AppHeader = () => {
           <CurrentUserStatus />
         </HStack>
       </HStack>
-    </Flex>
+    </Box>
   );
 };

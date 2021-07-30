@@ -28,6 +28,9 @@ export const RankingPage = (): ReactElement => {
               <MovieCard
                 movie={movie}
                 key={movie.id.toString()}
+                width="inherit"
+                bgColor="gray.100"
+                p="2"
                 args={{
                   showthumbnail: isThumbnailShown(),
                   isuserlogged: true,

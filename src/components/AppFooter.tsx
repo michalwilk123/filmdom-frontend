@@ -3,8 +3,8 @@ import React from "react";
 
 export const AppFooter = () => {
   return (
-    <Flex bgColor="gray.400" width="100vw" justifyContent="center" py="5">
-      <Center width={{ base: "100vw", md: "90vw", lg: "80vw" }}>
+    <Flex bgColor="gray.400" width="100%" justifyContent="center" py="5">
+      <Center width={{ base: "100%", md: "90%", lg: "80%" }}>
         <VStack spacing="0">
           <Text as="b">Contact Info</Text>
           <HStack>

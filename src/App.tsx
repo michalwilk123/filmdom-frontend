@@ -1,9 +1,9 @@
 import { ChakraProvider, Spacer, theme, VStack } from "@chakra-ui/react";
 import { AppHeader } from "./components/AppHeader";
-import { AppFooter } from "./components/AppFooter";
 import React from "react";
 import AppRouter from "./AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
+import { AppFooter } from "./components/AppFooter";
 
 export const App = () => {
   return (
