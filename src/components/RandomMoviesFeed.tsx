@@ -45,15 +45,15 @@ const fetchRandomMovies = (num: number): MovieListElement[] => {
   return testFilmList.slice(0, num);
 };
 
-interface Props extends StackProps{
-  args?:null
+interface Props extends StackProps {
+  args?: null;
 }
 
-export const RandomMoviesFeed = (props:Props) => {
+export const RandomMoviesFeed = (props: Props) => {
   const [randomMovieList, setRandomMovieList] = useState<MovieListElement[]>(
     []
   );
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     setRandomMovieList(fetchRandomMovies(NUM_OF_MOVIES));

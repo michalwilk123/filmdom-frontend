@@ -58,7 +58,7 @@ export const CommentModal = (props: Props) => {
   }, []);
 
   return (
-    <Modal {...props} isCentered scrollBehavior="inside" >
+    <Modal {...props} isCentered scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent bgColor="gray.100" minWidth="700px">
         <ModalHeader fontSize="lg">Comments {props.movieTitle}</ModalHeader>

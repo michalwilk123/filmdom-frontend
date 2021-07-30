@@ -33,7 +33,9 @@ export const AddMovieCommentModal = (props: Props) => {
   const [isTryingToSubmit, setIsTryingToSubmit] = useState(false);
 
   const createComment = () => {
-    console.log(`SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`);
+    console.log(
+      `SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`
+    );
     setIsTryingToSubmit(true);
     if (currentRating) {
       props.onClose();

@@ -64,10 +64,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
 
   return (
     <>
-      <Flex
-        {...props}
-        maxH="300px"
-      >
+      <Flex {...props} maxH="300px">
         {getThumbnail()}
         <Box
           alignItems="left"

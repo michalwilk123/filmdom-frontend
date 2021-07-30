@@ -25,10 +25,9 @@ const handleSubmit = (e: React.SyntheticEvent) => {
   console.log("looking from actor/movie/director");
 };
 
-interface HeaderVariantsProps{
-}
+interface HeaderVariantsProps {}
 
-const AppHeaderDefault = (props:HeaderVariantsProps) => {
+const AppHeaderDefault = (props: HeaderVariantsProps) => {
   let history = useHistory();
 
   return (
@@ -55,8 +54,7 @@ const AppHeaderDefault = (props:HeaderVariantsProps) => {
           >
             Ranking
           </Button>
-          <Box>
-          </Box>
+          <Box></Box>
           <form onSubmit={handleSubmit}>
             <FormControl onSubmit={handleSubmit}>
               <InputGroup>
@@ -79,9 +77,9 @@ const AppHeaderDefault = (props:HeaderVariantsProps) => {
       </HStack>
     </Box>
   );
-}
+};
 
-const AppHeaderSmall = (props:HeaderVariantsProps) => {
+const AppHeaderSmall = (props: HeaderVariantsProps) => {
   let history = useHistory();
 
   return (
@@ -95,12 +93,15 @@ const AppHeaderSmall = (props:HeaderVariantsProps) => {
           >
             Ranking
           </Button>
-          <Spacer/>
-          <CurrentUserStatus/>
+          <Spacer />
+          <CurrentUserStatus />
         </Flex>
-        <form onSubmit={handleSubmit} style={{width:"100%", padding:"10px"}}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ width: "100%", padding: "10px" }}
+        >
           <FormControl onSubmit={handleSubmit}>
-            <InputGroup >
+            <InputGroup>
               <Input
                 autoComplete="false"
                 bgColor="white"
@@ -118,15 +119,14 @@ const AppHeaderSmall = (props:HeaderVariantsProps) => {
       </VStack>
     </Box>
   );
-}
-
+};
 
 export const AppHeader = () => {
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
-  if (width > 950){
-    return <AppHeaderDefault/>;
+  if (width > 950) {
+    return <AppHeaderDefault />;
   } else {
-    return <AppHeaderSmall/>;
+    return <AppHeaderSmall />;
   }
 };

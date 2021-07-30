@@ -20,29 +20,34 @@ const HomePageDefault = () => {
       </Box>
 
       <Box flex={1} maxW="70%">
-        <Flex px="2" pb="5" pt="2" bgColor="white" justifyContent="center" mx="2">
+        <Flex
+          px="2"
+          pb="5"
+          pt="2"
+          bgColor="white"
+          justifyContent="center"
+          mx="2"
+        >
           <Heading fontSize="2xl" fontWeight="medium">
             This movies may interest you
           </Heading>
         </Flex>
-        <RandomMoviesFeed pt="2" px="2" width="100%"/>
+        <RandomMoviesFeed pt="2" px="2" width="100%" />
       </Box>
     </Container>
   );
-}
+};
 
 const HomePageSmall = () => {
   return (
-    <Container
-      minWidth={{ base: "100vw", md: "90vw", lg: "80vw", xl: "70vw" }}
-    >
+    <Container minWidth={{ base: "100vw", md: "90vw", lg: "80vw", xl: "70vw" }}>
       <Flex px="2" py="2" bgColor="white" justifyContent="center">
         <Heading fontSize="2xl" fontWeight="medium">
           This movies may interest you
         </Heading>
       </Flex>
       <Flex mb="3">
-        <RandomMoviesFeed px="0" width="100%" spacing="1"/>
+        <RandomMoviesFeed px="0" width="100%" spacing="1" />
       </Flex>
 
       <Flex px="2" py="2" bgColor="white" justifyContent="center">
@@ -51,20 +56,19 @@ const HomePageSmall = () => {
         </Heading>
       </Flex>
 
-      <Flex >
+      <Flex>
         <LastCommentsFeed />
       </Flex>
-
     </Container>
   );
-}
+};
 
 export const HomePage = () => {
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   if (width > 900) {
-    return <HomePageDefault/>;
+    return <HomePageDefault />;
   } else {
-    return <HomePageSmall/>;
+    return <HomePageSmall />;
   }
 };
