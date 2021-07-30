@@ -1,6 +1,7 @@
-import { Spacer, VStack } from "@chakra-ui/react";
+import { Spacer, StackProps, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { MovieListElement } from "../utils/backendInterfaces";
+import { useWindowDimensions } from "../utils/responsiveUtils";
 import { MovieCard } from "./ranking/MovieCard";
 
 const NUM_OF_MOVIES = 5;
@@ -43,26 +44,28 @@ const fetchRandomMovies = (num: number): MovieListElement[] => {
   return testFilmList.slice(0, num);
 };
 
-export const RandomMoviesFeed = () => {
+interface Props extends StackProps{
+  args?:null
+}
+
+export const RandomMoviesFeed = (props:Props) => {
   const [randomMovieList, setRandomMovieList] = useState<MovieListElement[]>(
     []
   );
+  const {width} = useWindowDimensions();
 
   useEffect(() => {
     setRandomMovieList(fetchRandomMovies(NUM_OF_MOVIES));
   }, []);
 
   return (
-    <VStack height="full" pt="2" px="2" width="100%">
+    <VStack {...props}>
       {randomMovieList.map((movie: MovieListElement) => (
         <MovieCard
           bgColor="gray.100"
           width="inherit"
-          // TODO : clean this!
-          // my="2"
-          // width="300px"
           movie={movie}
-          args={{ showthumbnail: true }}
+          args={{ showthumbnail: width > 1200 }}
         />
       ))}
       <Spacer />
