@@ -27,10 +27,13 @@ export const CurrentUserStatus = (props: Props) => {
     );
   }
   return (
-    <Button colorScheme="red" onClick={() => {
+    <Button
+      colorScheme="red"
+      onClick={() => {
         clearAuthToken();
         window.location.reload();
-      }}>
+      }}
+    >
       Log out
     </Button>
   );

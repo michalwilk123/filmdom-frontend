@@ -24,7 +24,11 @@ export const AppRouter = (props: Props) => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/ranking" component={RankingPage} />
-        <Route exact path="/invalid-auth-token" component={InvalidAuthTokenPage} />
+        <Route
+          exact
+          path="/invalid-auth-token"
+          component={InvalidAuthTokenPage}
+        />
         <Route path="/" component={PageNotFound} />
       </Switch>
     </Flex>
