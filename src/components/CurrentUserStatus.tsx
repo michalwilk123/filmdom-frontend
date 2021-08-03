@@ -1,21 +1,16 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
+import { useLocalStorage } from "../utils/customHooks";
 
-enum UserLoginStates {
-  LOGGED, // shows hello message
-  NOT_LOGGED, // shows buttons to ecourage user to sign up/in
-}
-
-interface Props {
-  userLoginState?: UserLoginStates;
-}
+interface Props {}
 
 export const CurrentUserStatus = (props: Props) => {
-  const noLoginStateDefined = "cannot define the login status of the user";
   let history = useHistory();
+  const [authToken, , clearAuthToken] = useLocalStorage("auth_token");
+  console.log(typeof authToken);
 
-  if (props.userLoginState === UserLoginStates.NOT_LOGGED) {
+  if (authToken === null) {
     return (
       <ButtonGroup>
         <Button
@@ -30,11 +25,13 @@ export const CurrentUserStatus = (props: Props) => {
         </Button>
       </ButtonGroup>
     );
-  } else if (props.userLoginState === UserLoginStates.LOGGED) {
-    return <div></div>;
-  } else throw noLoginStateDefined;
-};
-
-CurrentUserStatus.defaultProps = {
-  userLoginState: UserLoginStates.NOT_LOGGED,
+  }
+  return (
+    <Button colorScheme="red" onClick={() => {
+        clearAuthToken();
+        window.location.reload();
+      }}>
+      Log out
+    </Button>
+  );
 };

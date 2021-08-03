@@ -73,10 +73,10 @@ export const CommentModal = (props: Props) => {
           py="0"
         >
           {commentList.map((comment: MovieComment, index: number) => (
-            <>
-              <MovieCommentElement comment={comment} key={index} />
+            <React.Fragment key={index}>
+              <MovieCommentElement comment={comment} />
               <Divider borderColor="grey.300" />
-            </>
+            </React.Fragment>
           ))}
         </ModalBody>
       </ModalContent>

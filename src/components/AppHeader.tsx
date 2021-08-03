@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link as ReactLink, useHistory } from "react-router-dom";
-import { useWindowDimensions } from "../utils/responsiveUtils";
+import { useWindowDimensions } from "../utils/customHooks";
 import { CurrentUserStatus } from "./CurrentUserStatus";
 
 const handleSubmit = (e: React.SyntheticEvent) => {
@@ -121,7 +121,9 @@ const AppHeaderSmall = (props: HeaderVariantsProps) => {
   );
 };
 
-export const AppHeader = () => {
+interface Props {}
+
+export const AppHeader = (props: Props) => {
   const { width } = useWindowDimensions();
 
   if (width > 950) {

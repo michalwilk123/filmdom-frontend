@@ -49,11 +49,11 @@ export const LastCommentsFeed = () => {
 
   return (
     <VStack maxHeight="100%" spacing="0">
-      {lastCommentsList.map((comment: MovieComment) => (
-        <>
+      {lastCommentsList.map((comment: MovieComment, index: number) => (
+        <React.Fragment key={index}>
           <MovieCommentElement bgColor="white" width="100%" comment={comment} />
           <Divider borderColor="red" />
-        </>
+        </React.Fragment>
       ))}
     </VStack>
   );

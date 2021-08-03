@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { MovieListElement } from "../../utils/backendInterfaces";
+import { useLocalStorage } from "../../utils/customHooks";
 import { calculateStarValue, convertRatingToStar } from "../../utils/other";
 import { AddMovieCommentModal } from "./AddMovieCommentModal";
 import { CommentModal } from "./CommentModal";
@@ -24,12 +25,13 @@ interface Props extends FlexProps {
 
 interface ComponentProps {
   showthumbnail?: boolean;
-  isuserlogged?: boolean;
+  allowCommenting?: boolean;
 }
 
 export const MovieCard = (props: Props): React.ReactElement => {
   const CommentModalDisclosure = useDisclosure();
   const AddCommentModalDisclosure = useDisclosure();
+  const [authToken] = useLocalStorage("auth_token");
 
   const getThumbnail = (): React.ReactElement => {
     if (!props.args.showthumbnail) {
@@ -61,6 +63,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
     }
     return convertRatingToStar(val, 5);
   };
+  console.log("auth token" + authToken);
 
   return (
     <>
@@ -93,7 +96,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
                 <b>Comments ({props.movie.noOfComments})</b>
               </button>
             </p>
-            {props.args.isuserlogged && (
+            {props.args.allowCommenting && authToken !== null && (
               <Button
                 p="0"
                 my="1"

@@ -19,9 +19,6 @@ export const MovieCommentElement = (props: Props) => {
   return (
     <Box
       {...props}
-      // borderColor="blue.100"
-      // borderWidth="1px"
-      // rounded="md"
       minHeight={props.comment.text !== null ? "100px" : "50px"}
       p="2"
     >

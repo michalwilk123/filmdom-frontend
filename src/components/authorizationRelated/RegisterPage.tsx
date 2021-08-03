@@ -9,8 +9,10 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
-import { useWindowDimensions } from "../../utils/responsiveUtils";
+import { useWindowDimensions } from "../../utils/customHooks";
 import { MovieGenreSelector } from "./MovieGenreSelector";
+import axios from "axios";
+import { useHistory } from "react-router";
 
 export default function RegisterPage(): ReactElement {
   const [regiDataInvalid, setRegiDataInvalid] = useState(true);
@@ -18,6 +20,7 @@ export default function RegisterPage(): ReactElement {
   const [passw, setPassw] = useState("");
   const [reapeatedPassw, setReapeatedPassw] = useState("");
   let { width } = useWindowDimensions();
+  let history = useHistory();
 
   useEffect(() => {
     if (passw.length < 8) {
@@ -42,10 +45,30 @@ export default function RegisterPage(): ReactElement {
     setPasswordExact(reapeatedPassw === passw);
   }, [reapeatedPassw, passw]);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // NOTE: sending post data to the api
-    console.log("i am registering");
+    const form = e.currentTarget;
+    const formElements = form.elements as typeof form.elements & {
+      username: HTMLInputElement;
+      mail: HTMLInputElement;
+      password: HTMLInputElement;
+    };
+
+    axios
+      .post(`${process.env.REACT_APP_DOMAIN}users/`, {
+        username: formElements.username.value,
+        email: formElements.mail.value,
+        password: formElements.password.value,
+      })
+      .then(
+        (response) => {
+          history.push("/login/success");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    console.log(`${process.env.REACT_APP_DOMAIN}users/`);
   };
 
   const inputFormDispatcher = (
@@ -107,7 +130,7 @@ export default function RegisterPage(): ReactElement {
               <MovieGenreSelector cols={calculateColGenres()} />
             </Container>
             <Button
-              isDisabled={regiDataInvalid || !passwordExact}
+              isDisabled={false && (regiDataInvalid || !passwordExact)}
               type="submit"
               colorScheme="gray"
             >

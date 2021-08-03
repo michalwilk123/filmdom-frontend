@@ -1,7 +1,7 @@
 import { Flex, VStack } from "@chakra-ui/react";
 import React, { ReactElement, useState } from "react";
 import { MovieListElement } from "../../utils/backendInterfaces";
-import { useWindowDimensions } from "../../utils/responsiveUtils";
+import { useWindowDimensions } from "../../utils/customHooks";
 import { MovieCard } from "./MovieCard";
 import { MovieFilterFeed } from "./MovieFilterFeed";
 
@@ -33,7 +33,7 @@ export const RankingPage = (): ReactElement => {
                 p="2"
                 args={{
                   showthumbnail: isThumbnailShown(),
-                  isuserlogged: true,
+                  allowCommenting: true,
                 }}
               />
             );

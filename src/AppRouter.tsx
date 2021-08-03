@@ -1,13 +1,16 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import LoginPage from "./components/authorizationRelated/LoginPage";
+import { InvalidAuthTokenPage } from "./components/authorizationRelated/InvalidAuthTokenPage";
+import { LoginPage } from "./components/authorizationRelated/LoginPage";
 import RegisterPage from "./components/authorizationRelated/RegisterPage";
 import { HomePage } from "./components/HomePage";
 import { RankingPage } from "./components/ranking/RankingPage";
 import PageNotFound from "./components/special/PageNotFound";
 
-export default function AppRouter() {
+interface Props {}
+
+export const AppRouter = (props: Props) => {
   return (
     <Flex
       width="100%"
@@ -21,8 +24,9 @@ export default function AppRouter() {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/ranking" component={RankingPage} />
+        <Route exact path="/invalid-auth-token" component={InvalidAuthTokenPage} />
         <Route path="/" component={PageNotFound} />
       </Switch>
     </Flex>
   );
-}
+};

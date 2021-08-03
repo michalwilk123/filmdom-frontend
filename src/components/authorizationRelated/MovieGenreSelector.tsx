@@ -28,7 +28,6 @@ export const MovieGenreSelector = (props: Props): ReactElement => {
       {arrReshape(genreList, props.cols).map((row: string[]) => {
         // TODO: this breaks with long genre names and I
         // dont know how to solve it
-        // NOTE: WRAP. this would so much easier...
         return (
           <HStack key={row.toString()} spacing="5">
             {row.map((genreName) => (

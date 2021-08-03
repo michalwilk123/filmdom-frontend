@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
-import { useWindowDimensions } from "../utils/responsiveUtils";
+import { useWindowDimensions } from "../utils/customHooks";
 import { LastCommentsFeed } from "./LastCommentsFeed";
 import { RandomMoviesFeed } from "./RandomMoviesFeed";
 
