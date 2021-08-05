@@ -7,8 +7,8 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
-import { useLocalStorage } from "../../utils/customHooks";
+import {useLocalStorage} from "@rehooks/local-storage";
+import React, { ReactElement, useEffect } from "react";
 
 // TODO: powinno sie gdzies tutaj sprawdzać czy użytkownik już jest zalogowany
 interface Props {
@@ -16,14 +16,17 @@ interface Props {
 }
 
 export const LoginPage = (props: Props): ReactElement => {
+  const [,setToken,deleteToken] = useLocalStorage("auth_token");
   // TODO: plug this into the website
-  const [, setAuthToken] = useLocalStorage("auth_token");
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     // NOTE: Connecting to the api! Retrieving session token
+    setToken("qwerty");
     console.log("im am logging in");
   };
-  setAuthToken(null);
+  useEffect(() => {
+    deleteToken();
+  }, [deleteToken])
 
   return (
     <Flex

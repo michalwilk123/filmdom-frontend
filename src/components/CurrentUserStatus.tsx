@@ -1,16 +1,15 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import { useLocalStorage } from "@rehooks/local-storage";
 import React from "react";
 import { useHistory } from "react-router";
-import { useLocalStorage } from "../utils/customHooks";
-
 interface Props {}
 
 export const CurrentUserStatus = (props: Props) => {
   let history = useHistory();
-  const [authToken, , clearAuthToken] = useLocalStorage("auth_token");
-  console.log(typeof authToken);
+  const [authToken,,deleteToken] = useLocalStorage<string>("auth_token");
+  console.log(authToken);
 
-  if (authToken === null) {
+  if (!authToken) {
     return (
       <ButtonGroup>
         <Button
@@ -30,8 +29,8 @@ export const CurrentUserStatus = (props: Props) => {
     <Button
       colorScheme="red"
       onClick={() => {
-        clearAuthToken();
-        window.location.reload();
+        deleteToken();
+        console.log("dadas");
       }}
     >
       Log out

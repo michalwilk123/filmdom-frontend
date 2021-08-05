@@ -8,9 +8,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useLocalStorage } from "@rehooks/local-storage";
 import React from "react";
 import { MovieListElement } from "../../utils/backendInterfaces";
-import { useLocalStorage } from "../../utils/customHooks";
 import { calculateStarValue, convertRatingToStar } from "../../utils/other";
 import { AddMovieCommentModal } from "./AddMovieCommentModal";
 import { CommentModal } from "./CommentModal";
