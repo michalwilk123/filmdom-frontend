@@ -8,9 +8,9 @@ import {
   Input,
 } from "@chakra-ui/react";
 import {useLocalStorage} from "@rehooks/local-storage";
+import axios from "axios";
 import React, { ReactElement, useEffect } from "react";
 
-// TODO: powinno sie gdzies tutaj sprawdzać czy użytkownik już jest zalogowany
 interface Props {
   fresh_register?: boolean;
 }
@@ -18,15 +18,26 @@ interface Props {
 export const LoginPage = (props: Props): ReactElement => {
   const [,setToken,deleteToken] = useLocalStorage("auth_token");
   // TODO: plug this into the website
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const formElements = form.elements as typeof form.elements & {
+      username: HTMLInputElement;
+      password: HTMLInputElement;
+    };
     // NOTE: Connecting to the api! Retrieving session token
     setToken("qwerty");
+    axios.post(
+        `${process.env.REACT_APP_DOMAIN}users/`, {
+        username: formElements.username.value,
+        password: formElements.password.value,
+      }
+    )
     console.log("im am logging in");
   };
   useEffect(() => {
     deleteToken();
-  }, [deleteToken])
+  }, [])
 
   return (
     <Flex

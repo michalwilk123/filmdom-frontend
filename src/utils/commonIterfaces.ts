@@ -5,5 +5,4 @@ export enum MovieSortMethods {
   WORST = "rating (lowest)",
   NEWEST = "date",
   OLDEST = "date (oldest)",
-  ALPHABETICAL = "alphabetical",
 }
