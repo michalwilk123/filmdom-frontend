@@ -5,4 +5,15 @@ export enum MovieSortMethods {
   WORST = "rating (lowest)",
   NEWEST = "date",
   OLDEST = "date (oldest)",
+  RANDOM = "random",
+}
+
+export enum CommentSortMethods {
+  NEWEST = "date",
+  OLDEST = "date (oldest)",
+}
+
+export interface ResponseListElement {
+  id:number,
+  name:string
 }

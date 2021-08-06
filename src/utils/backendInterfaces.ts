@@ -4,9 +4,10 @@ export interface MovieListElement {
   thumbnail: string | null; // url or no photo
   description: string;
   director: string;
-  noOfComments: number; // popularity
   avgRating: number; // best/worst
   produceDate: string; // newest oldest
+  genres:string[]|number[];
+  actors:string[]|number[]
 }
 
 export interface UserDtoData {

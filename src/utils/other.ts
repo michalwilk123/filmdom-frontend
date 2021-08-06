@@ -1,3 +1,5 @@
+import { MovieSortMethods } from "./commonIterfaces";
+
 export enum STAR_VALUES {
   FULL = "★",
   HALF = "⯪", // this icon does not has the same size as the others
@@ -62,4 +64,8 @@ export const convertRatingToStar = (
   }
 
   return starString;
+};
+
+export const sortMethodStringToEnum = (method:string):MovieSortMethods => {
+  return MovieSortMethods[method as keyof typeof MovieSortMethods]; // :^)
 };
