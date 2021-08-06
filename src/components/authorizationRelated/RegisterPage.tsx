@@ -11,8 +11,8 @@ import {
 import React, { ReactElement, useEffect, useState } from "react";
 import { useWindowDimensions } from "../../utils/customHooks";
 import { MovieGenreSelector } from "./MovieGenreSelector";
-import axios from "axios";
 import { useHistory } from "react-router";
+import { registerUser } from "../../utils/apiConnector";
 
 export default function RegisterPage(): ReactElement {
   const [regiDataInvalid, setRegiDataInvalid] = useState(true);
@@ -54,20 +54,18 @@ export default function RegisterPage(): ReactElement {
       password: HTMLInputElement;
     };
 
-    axios
-      .post(`${process.env.REACT_APP_DOMAIN}users/`, {
-        username: formElements.username.value,
-        email: formElements.mail.value,
-        password: formElements.password.value,
-      })
-      .then(
-        (response) => {
+    registerUser(
+      formElements.username.value,
+      formElements.mail.value,
+      formElements.password.value
+    ).then(
+        () => {
           history.push("/login/success");
-        },
-        (error) => {
-          console.log(error);
         }
-      );
+    ).catch((e)=>{
+      console.log(e);
+    });
+
     console.log(`${process.env.REACT_APP_DOMAIN}users/`);
   };
 

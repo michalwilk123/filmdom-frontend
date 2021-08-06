@@ -7,16 +7,16 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import {useLocalStorage} from "@rehooks/local-storage";
-import axios from "axios";
+import { useLocalStorage } from "@rehooks/local-storage";
 import React, { ReactElement, useEffect } from "react";
+import { getAuthToken } from "../../utils/apiConnector";
 
 interface Props {
   fresh_register?: boolean;
 }
 
 export const LoginPage = (props: Props): ReactElement => {
-  const [,setToken,deleteToken] = useLocalStorage("auth_token");
+  const [, setToken, deleteToken] = useLocalStorage("auth_token");
   // TODO: plug this into the website
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,18 +26,29 @@ export const LoginPage = (props: Props): ReactElement => {
       password: HTMLInputElement;
     };
     // NOTE: Connecting to the api! Retrieving session token
-    setToken("qwerty");
-    axios.post(
-        `${process.env.REACT_APP_DOMAIN}users/`, {
-        username: formElements.username.value,
-        password: formElements.password.value,
-      }
-    )
-    console.log("im am logging in");
+
+    getAuthToken(formElements.username.value, formElements.password.value)
+      .then((response) => {
+        setToken(response.data.token);
+      })
+      .catch((error) => {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              console.log("400 error");
+              break;
+            case 401:
+              console.log("401 error");
+              break;
+            default:
+              console.log(`${error.response.status} error`);
+          }
+        }
+      });
   };
   useEffect(() => {
     deleteToken();
-  }, [])
+  }, [deleteToken]);
 
   return (
     <Flex
