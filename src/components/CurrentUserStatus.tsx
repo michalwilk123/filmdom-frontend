@@ -6,7 +6,8 @@ interface Props {}
 
 export const CurrentUserStatus = (props: Props) => {
   let history = useHistory();
-  const [authToken,,deleteToken] = useLocalStorage<string>("auth_token");
+  const [authToken, , deleteToken] = useLocalStorage<string>("auth_token");
+  const [, , deleteUserId] = useLocalStorage("auth_token");
   console.log(authToken);
 
   if (!authToken) {
@@ -30,7 +31,7 @@ export const CurrentUserStatus = (props: Props) => {
       colorScheme="red"
       onClick={() => {
         deleteToken();
-        console.log("dadas");
+        deleteUserId();
       }}
     >
       Log out

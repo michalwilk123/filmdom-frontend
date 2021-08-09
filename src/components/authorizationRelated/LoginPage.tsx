@@ -17,6 +17,7 @@ interface Props {
 
 export const LoginPage = (props: Props): ReactElement => {
   const [, setToken, deleteToken] = useLocalStorage("auth_token");
+  const [, setUserId, deleteUserId] = useLocalStorage("user_id");
   // TODO: plug this into the website
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ export const LoginPage = (props: Props): ReactElement => {
     getAuthToken(formElements.username.value, formElements.password.value)
       .then((response) => {
         setToken(response.data.token);
+        setUserId(response.data.user_id);
       })
       .catch((error) => {
         if (error.response) {
@@ -48,7 +50,8 @@ export const LoginPage = (props: Props): ReactElement => {
   };
   useEffect(() => {
     deleteToken();
-  }, [deleteToken]);
+    deleteUserId();
+  }, [deleteToken, deleteUserId]);
 
   return (
     <Flex
