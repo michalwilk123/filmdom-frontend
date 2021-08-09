@@ -19,25 +19,43 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
+import { useLocalStorage } from "@rehooks/local-storage";
 import React, { useState } from "react";
-import { UserAuthSingature } from "../../utils/backendInterfaces";
+import { sendComment } from "../../utils/apiConnector";
 import { StarsRatingComponent } from "../special/StarsRatingComponent";
 
 interface Props extends UseModalProps {
-  signature: UserAuthSingature;
+  args:{
+    movieId: number;
+  }
 }
 
 export const AddMovieCommentModal = (props: Props) => {
   const [currentRating, setCurrentRating] = useState<number | null>(null);
   const [additText, setAdditText] = useState("");
   const [isTryingToSubmit, setIsTryingToSubmit] = useState(false);
+  const [userId] = useLocalStorage("user_id");
+  const [authToken] = useLocalStorage("auth_token");
 
   const createComment = () => {
-    console.log(
-      `SENDING COMMENT: RATING:${currentRating} | TEXT: ${additText}`
-    );
     setIsTryingToSubmit(true);
+    const LSError = "BAD LOCAL STORAGE DATA!";
+
     if (currentRating) {
+      if (!(authToken && userId)) {
+        throw LSError;
+      }
+      sendComment({
+        movieId: props.args.movieId,
+        userId: parseInt(userId),
+        rating: currentRating,
+        authToken: authToken,
+        text:additText
+      }).then(
+        (response) => {
+
+        }
+      ).catch(e=>console.log(e));
       props.onClose();
     }
   };
