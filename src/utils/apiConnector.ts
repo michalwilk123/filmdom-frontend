@@ -34,31 +34,31 @@ interface GetMovieParams {
 export const getMovies = async (
   params?: GetMovieParams
 ): Promise<AxiosResponse> => {
-  let data: GetMovieParams = {};
+  let data: {sort_method?:string, limit?:number} = {};
 
   params && params.limit && (data.limit = params.limit);
   if (params && params.sortMethod) {
     switch (params.sortMethod) {
       case MovieSortMethods.POPULARITY_ASC:
-        data.sortMethod = "most_popular";
+        data.sort_method = "most_popular";
         break;
       case MovieSortMethods.POPULARITY_DES:
-        data.sortMethod = "least_popular";
+        data.sort_method = "least_popular";
         break;
       case MovieSortMethods.BEST:
-        data.sortMethod = "best";
+        data.sort_method = "best";
         break;
       case MovieSortMethods.WORST:
-        data.sortMethod = "worst";
+        data.sort_method = "worst";
         break;
       case MovieSortMethods.NEWEST:
-        data.sortMethod = "newest";
+        data.sort_method = "newest";
         break;
       case MovieSortMethods.OLDEST:
-        data.sortMethod = "oldest";
+        data.sort_method = "oldest";
         break;
       case MovieSortMethods.RANDOM:
-        data.sortMethod = "random";
+        data.sort_method = "random";
         break;
     }
   }
