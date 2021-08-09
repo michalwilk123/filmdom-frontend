@@ -9,39 +9,11 @@ import {
   UseModalProps,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { getComments } from "../../utils/apiConnector";
+import { dispatchMovieComment } from "../../utils/apiDispatcher";
 import { MovieComment } from "../../utils/backendInterfaces";
+import { CommentSortMethods } from "../../utils/commonIterfaces";
 import { MovieCommentElement } from "./MovieCommentElement";
-
-const test_comments: MovieComment[] = [
-  {
-    text: "I really like this movie it is my favourite",
-    rating: 5,
-    creator: "nice commenter",
-    datePosted: "10-10-2020",
-    movieId: 1,
-  },
-  {
-    text: "This movie was w/e. Fun but waste of time.",
-    rating: 3,
-    creator: "Marc Zucc",
-    datePosted: "12-05-2021",
-    movieId: 2,
-  },
-  {
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu ullamcorper dui. Maecenas commodo orci et iaculis dapibus. Mauris eleifend malesuada sollicitudin. Aliquam ac feugiat mi. Aenean massa felis, pulvinar eget nulla et, luctus facilisis nisi. In hac habitasse platea dictumst. Etiam suscipit est arcu, in finibus orci semper nec. Duis vitae ipsum metus. Nullam in tellus congue, rutrum ex nec, aliquet mi. Suspendisse pellentesque lobortis ipsum eu imperdiet. In luctus justo tortor, nec accumsan risus aliquam a. Mauris non accumsan lorem. ",
-    rating: 3,
-    creator: "Lorem Ipsum",
-    datePosted: "02-02-2021",
-    movieId: 1,
-  },
-  {
-    text: null,
-    rating: 1,
-    creator: "anonim",
-    datePosted: "20-07-2021",
-    movieId: 3,
-  },
-];
 
 interface Props extends UseModalProps {
   movieId: number;
@@ -54,8 +26,27 @@ export const CommentModal = (props: Props) => {
 
   useEffect(() => {
     // NOTE: fetching comments from the movie
-    setCommentList(test_comments);
+    fetchMovieComments();
   }, []);
+
+  const fetchMovieComments = () => {
+    let fetchedComments: MovieComment[] = [];
+
+    getComments({
+      movie_id: props.movieId,
+      sort_method: CommentSortMethods.NEWEST,
+      limit: 100,
+    })
+      .then((response) => {
+        fetchedComments = response.data.map((x: any) =>
+          dispatchMovieComment(x)
+        );
+        setCommentList(fetchedComments);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <Modal {...props} isCentered scrollBehavior="inside">
