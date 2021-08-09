@@ -67,5 +67,23 @@ export const convertRatingToStar = (
 };
 
 export const sortMethodStringToEnum = (method:string):MovieSortMethods => {
-  return MovieSortMethods[method as keyof typeof MovieSortMethods]; // :^)
+  const sortMethodException = "Movie sort method not found";
+  switch (method){
+    case "popularity":
+      return MovieSortMethods.POPULARITY_ASC;
+    case "popularity (lowest)":
+      return MovieSortMethods.POPULARITY_DES;
+    case "rating":
+      return MovieSortMethods.BEST;
+    case "rating (lowest)":
+      return MovieSortMethods.WORST;
+    case "date":
+      return MovieSortMethods.NEWEST;
+    case "date (oldest)":
+      return MovieSortMethods.OLDEST;
+    case "random":
+      return MovieSortMethods.RANDOM;
+    default:
+      throw sortMethodException;
+  }
 };
