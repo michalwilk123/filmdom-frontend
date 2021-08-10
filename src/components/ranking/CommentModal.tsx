@@ -27,6 +27,7 @@ export const CommentModal = (props: Props) => {
   useEffect(() => {
     // NOTE: fetching comments from the movie
     fetchMovieComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchMovieComments = () => {

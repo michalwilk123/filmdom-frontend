@@ -66,9 +66,9 @@ export const convertRatingToStar = (
   return starString;
 };
 
-export const sortMethodStringToEnum = (method:string):MovieSortMethods => {
+export const sortMethodStringToEnum = (method: string): MovieSortMethods => {
   const sortMethodException = "Movie sort method not found";
-  switch (method){
+  switch (method) {
     case "popularity":
       return MovieSortMethods.POPULARITY_ASC;
     case "popularity (lowest)":

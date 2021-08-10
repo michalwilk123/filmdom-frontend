@@ -35,7 +35,12 @@ export const LastCommentsFeed = () => {
     <VStack maxHeight="100%" spacing="0">
       {lastCommentsList.map((comment: MovieComment, index: number) => (
         <React.Fragment key={index}>
-          <MovieCommentElement bgColor="white" width="100%" comment={comment} />
+          <MovieCommentElement
+            bgColor="white"
+            width="100%"
+            args={{ showMovieTitle: true }}
+            comment={comment}
+          />
           <Divider borderColor="red" />
         </React.Fragment>
       ))}

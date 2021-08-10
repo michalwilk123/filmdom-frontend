@@ -13,7 +13,7 @@ export const InvalidAuthTokenPage = (props: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (timeLeft === SEC_TO_REDIRECT) {
-        deleteFromStorage("auth_token")
+        deleteFromStorage("auth_token");
       } else if (timeLeft <= 0) {
         history.push("/home");
         return;

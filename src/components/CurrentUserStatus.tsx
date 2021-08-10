@@ -8,7 +8,6 @@ export const CurrentUserStatus = (props: Props) => {
   let history = useHistory();
   const [authToken, , deleteToken] = useLocalStorage<string>("auth_token");
   const [, , deleteUserId] = useLocalStorage("auth_token");
-  console.log(authToken);
 
   if (!authToken) {
     return (

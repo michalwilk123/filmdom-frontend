@@ -6,8 +6,8 @@ export interface MovieListElement {
   director: string;
   avgRating: number; // best/worst
   produceDate: string; // newest oldest
-  genres:string[]|number[];
-  actors:string[]|number[]
+  genres: string[] | number[];
+  actors: string[] | number[];
 }
 
 export interface UserDtoData {
@@ -25,6 +25,7 @@ export interface GenreInterface {
 
 export interface MovieComment {
   movieId: number;
+  movieTitle: string;
   text: string | null;
   rating: number;
   creator: string;

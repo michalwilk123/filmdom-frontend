@@ -14,6 +14,6 @@ export enum CommentSortMethods {
 }
 
 export interface ResponseListElement {
-  id:number,
-  name:string
+  id: number;
+  name: string;
 }

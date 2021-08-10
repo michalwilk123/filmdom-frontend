@@ -113,7 +113,6 @@ export const RandomMoviesFeed = (props: Props) => {
                 onClick={() => setCurrentPageNum(currentPageNum + 1)}
                 ml="10px"
               >
-                {" "}
                 Next <ChevronRightIcon ml="5px" />
               </Button>
             )}
