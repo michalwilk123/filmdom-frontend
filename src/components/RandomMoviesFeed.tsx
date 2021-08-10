@@ -1,4 +1,12 @@
-import { Spacer, StackProps, VStack } from "@chakra-ui/react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  Button,
+  ButtonGroup,
+  Flex,
+  Spacer,
+  StackProps,
+  VStack,
+} from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
@@ -12,7 +20,10 @@ import {
   dispatchMovieGenres,
 } from "../utils/apiDispatcher";
 import { MovieListElement } from "../utils/backendInterfaces";
-import { MovieSortMethods, ResponseListElement } from "../utils/commonIterfaces";
+import {
+  MovieSortMethods,
+  ResponseListElement,
+} from "../utils/commonIterfaces";
 import { useWindowDimensions } from "../utils/customHooks";
 import { MovieCard } from "./ranking/MovieCard";
 
@@ -26,13 +37,15 @@ export const RandomMoviesFeed = (props: Props) => {
   const [randomMovieList, setRandomMovieList] = useState<MovieListElement[]>(
     []
   );
+  const [currentPageNum, setCurrentPageNum] = useState<number>(1);
   const { width } = useWindowDimensions();
 
   useEffect(() => {
     fetchRandomMovies();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPageNum]);
 
-  const fetchRandomMovies = ():void=> {
+  const fetchRandomMovies = (): void => {
     let movieGenres: string[];
     let movieActors: string[];
     let movieList: MovieListElement[] = [];
@@ -41,12 +54,19 @@ export const RandomMoviesFeed = (props: Props) => {
       .all([
         getMovieGenres(),
         getMovieActors(),
-        getMovies({ sortMethod: MovieSortMethods.RANDOM }),
+        getMovies({
+          sortMethod: MovieSortMethods.RANDOM,
+          page: currentPageNum,
+        }),
       ])
       .then(
         axios.spread((genreRes, actorRes, movieRes) => {
-          genreRes.data.sort((a:ResponseListElement,b:ResponseListElement)=>a.id-b.id);
-          actorRes.data.sort((a:ResponseListElement,b:ResponseListElement)=>a.id-b.id);
+          genreRes.data.sort(
+            (a: ResponseListElement, b: ResponseListElement) => a.id - b.id
+          );
+          actorRes.data.sort(
+            (a: ResponseListElement, b: ResponseListElement) => a.id - b.id
+          );
 
           movieGenres = genreRes.data.map((x: ResponseListElement) => x.name);
           movieActors = actorRes.data.map((x: ResponseListElement) => x.name);
@@ -55,7 +75,7 @@ export const RandomMoviesFeed = (props: Props) => {
             .map((e) => dispatchMovieGenres(e, movieGenres))
             .map((e) => dispatchMovieActors(e, movieActors));
           setNextPage(movieRes.data.next);
-          setPrevPage(movieRes.data.prev);
+          setPrevPage(movieRes.data.previous);
           setRandomMovieList(movieList);
         })
       )
@@ -77,6 +97,29 @@ export const RandomMoviesFeed = (props: Props) => {
         />
       ))}
       <Spacer />
+      {(nextPage || prevPage) && (
+        <Flex width="inherit" justifyContent="center" backgroundColor="white">
+          <ButtonGroup my="5px" p="1px">
+            {prevPage && (
+              <Button
+                onClick={() => setCurrentPageNum(currentPageNum - 1)}
+                mr="10px"
+              >
+                <ChevronLeftIcon mr="5px" /> Previous
+              </Button>
+            )}
+            {nextPage && (
+              <Button
+                onClick={() => setCurrentPageNum(currentPageNum + 1)}
+                ml="10px"
+              >
+                {" "}
+                Next <ChevronRightIcon ml="5px" />
+              </Button>
+            )}
+          </ButtonGroup>
+        </Flex>
+      )}
     </VStack>
   );
 };
