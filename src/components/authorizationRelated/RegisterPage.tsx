@@ -56,15 +56,15 @@ export default function RegisterPage(): ReactElement {
 
     registerUser(
       formElements.username.value,
-      formElements.mail.value,
-      formElements.password.value
-    ).then(
-        () => {
-          history.push("/login/success");
-        }
-    ).catch((e)=>{
-      console.log(e);
-    });
+      formElements.password.value,
+      formElements.mail.value
+    )
+      .then(() => {
+        history.push("/login/success");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     console.log(`${process.env.REACT_APP_DOMAIN}users/`);
   };
@@ -128,7 +128,7 @@ export default function RegisterPage(): ReactElement {
               <MovieGenreSelector cols={calculateColGenres()} />
             </Container>
             <Button
-              isDisabled={false && (regiDataInvalid || !passwordExact)}
+              isDisabled={regiDataInvalid || !passwordExact}
               type="submit"
               colorScheme="gray"
             >
