@@ -29,13 +29,21 @@ export const registerUser = async (
 interface GetMovieParams {
   sortMethod?: MovieSortMethods | string;
   limit?: number;
+  searchPhrase?: string;
+  page?: number;
 }
 
 export const getMovies = async (
   params?: GetMovieParams
 ): Promise<AxiosResponse> => {
-  let data: {sort_method?:string, limit?:number} = {};
+  let data: {
+    sort_method?: string;
+    limit?: number;
+    title_like?: string;
+    page?: number;
+  } = {};
 
+  params && params.page && (data.page = params.page);
   params && params.limit && (data.limit = params.limit);
   if (params && params.sortMethod) {
     switch (params.sortMethod) {
@@ -62,6 +70,8 @@ export const getMovies = async (
         break;
     }
   }
+  console.log(params);
+  params && params.searchPhrase && (data.title_like = params.searchPhrase);
 
   return axios.get(`${process.env.REACT_APP_DOMAIN}movies/`, { params: data });
 };
@@ -111,6 +121,31 @@ export const getComments = async (
 
 export const getComment = async (id: number): Promise<AxiosResponse> => {
   return axios.get(`${process.env.REACT_APP_DOMAIN}comments/${id}`);
+};
+
+interface SendCommentArgs {
+  movieId: number;
+  userId: number;
+  rating: number;
+  authToken: string;
+  text?: string;
+}
+
+export const sendComment = async (
+  args: SendCommentArgs
+): Promise<AxiosResponse> => {
+  let data: any = {
+    commented_movie: args.movieId,
+    rating: args.rating,
+    creator: args.userId,
+  };
+  args.text && (data.text = args.text);
+
+  return axios.post(`${process.env.REACT_APP_DOMAIN}comments/`, data, {
+    headers: {
+      Authorization: `Token ${args.authToken}`,
+    },
+  });
 };
 
 export const getMovieGenres = async (): Promise<AxiosResponse> => {

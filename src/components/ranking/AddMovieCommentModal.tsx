@@ -25,9 +25,9 @@ import { sendComment } from "../../utils/apiConnector";
 import { StarsRatingComponent } from "../special/StarsRatingComponent";
 
 interface Props extends UseModalProps {
-  args:{
+  args: {
     movieId: number;
-  }
+  };
 }
 
 export const AddMovieCommentModal = (props: Props) => {
@@ -50,12 +50,10 @@ export const AddMovieCommentModal = (props: Props) => {
         userId: parseInt(userId),
         rating: currentRating,
         authToken: authToken,
-        text:additText
-      }).then(
-        (response) => {
-
-        }
-      ).catch(e=>console.log(e));
+        text: additText,
+      })
+        .then((response) => {})
+        .catch((e) => console.log(e));
       props.onClose();
     }
   };
