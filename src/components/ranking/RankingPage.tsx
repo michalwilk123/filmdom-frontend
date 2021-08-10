@@ -1,4 +1,4 @@
-import { Flex, VStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, Flex, Spacer, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import React, { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -19,10 +19,14 @@ import { MovieCard } from "./MovieCard";
 import { MovieFilterFeed } from "./MovieFilterFeed";
 import queryString from "query-string";
 import { sortMethodStringToEnum } from "../../utils/other";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 export const RankingPage = (): ReactElement => {
   const [movieRanking, setMovieRanking] = useState<MovieListElement[]>([]);
   const { args } = useParams<{ args: string | undefined }>();
+  const [nextPage, setNextPage] = useState<null | string>(null);
+  const [prevPage, setPrevPage] = useState<null | string>(null);
+  const [currentPageNum, setCurrentPageNum] = useState<number>(1);
 
   const { width } = useWindowDimensions();
 
@@ -41,7 +45,8 @@ export const RankingPage = (): ReactElement => {
         (fetchParams.searchPhrase = urlParams.search_phrase);
     }
     fetchRanking(fetchParams);
-  }, [args]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [args, currentPageNum]);
 
   const fetchRanking = (args: {
     sort_method?: MovieSortMethods;
@@ -56,19 +61,21 @@ export const RankingPage = (): ReactElement => {
         getMovieGenres(),
         getMovieActors(),
         getMovies({
-          limit: 5,
           sortMethod: args.sort_method,
           searchPhrase: args.searchPhrase,
+          page: currentPageNum,
         }),
       ])
       .then(
         axios.spread((genreRes, actorRes, movieRes) => {
           movieGenres = genreRes.data;
           movieActors = actorRes.data;
-          movieList = movieRes.data.map((x: any) => dispatchMovie(x));
+          movieList = movieRes.data.results.map((x: any) => dispatchMovie(x));
           movieList
             .map((e) => dispatchMovieGenres(e, movieGenres))
             .map((e) => dispatchMovieActors(e, movieActors));
+          setNextPage(movieRes.data.next);
+          setPrevPage(movieRes.data.previous);
           setMovieRanking(movieList);
         })
       )
@@ -107,6 +114,29 @@ export const RankingPage = (): ReactElement => {
             );
           })}
         </VStack>
+        <Spacer/>
+        {(nextPage || prevPage) && (
+          <Flex width="inherit" justifyContent="center" backgroundColor="white">
+            <ButtonGroup mb="10px" p="1px">
+              {prevPage && (
+                <Button
+                  onClick={() => setCurrentPageNum(currentPageNum - 1)}
+                  mr="10px"
+                >
+                  <ChevronLeftIcon mr="5px" /> Previous
+                </Button>
+              )}
+              {nextPage && (
+                <Button
+                  onClick={() => setCurrentPageNum(currentPageNum + 1)}
+                  ml="10px"
+                >
+                  Next <ChevronRightIcon ml="5px" />
+                </Button>
+              )}
+            </ButtonGroup>
+          </Flex>
+        )}
       </VStack>
     </Flex>
   );
