@@ -1,10 +1,13 @@
-import { Box, BoxProps, Flex, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Flex, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import { MovieComment } from "../../utils/backendInterfaces";
 import { calculateStarValue, convertRatingToStar } from "../../utils/other";
 
 interface Props extends BoxProps {
   comment: MovieComment;
+  args?: {
+    showMovieTitle?: boolean;
+  };
 }
 
 export const MovieCommentElement = (props: Props) => {
@@ -20,14 +23,20 @@ export const MovieCommentElement = (props: Props) => {
     <Box
       {...props}
       minHeight={props.comment.text !== null ? "100px" : "50px"}
+      width="100%"
       p="2"
     >
-      <Flex mt="0" justifyContent="left" width="100%">
-        <Text as="i">
-          <b>User:</b> {props.comment.creator}
+      <Flex mt="0" justifyContent="left" width="inherit">
+        <Box width="inherit">
+          {props.args?.showMovieTitle && (
+            <Flex justifyContent="center">
+              <Heading fontSize="xl">{props.comment.movieTitle}</Heading>
+            </Flex>
+          )}
+          <b>From:</b> {props.comment.creator}
           <p style={{ fontSize: "xs" }}>{props.comment.datePosted}</p>
           <p>{getStarString(props.comment.rating)}</p>
-        </Text>
+        </Box>
       </Flex>
       <Flex mb="0">
         {props.comment.text === null ? (
