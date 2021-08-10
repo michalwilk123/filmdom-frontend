@@ -14,21 +14,24 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { Link as ReactLink, useHistory } from "react-router-dom";
 import { useWindowDimensions } from "../utils/customHooks";
 import { CurrentUserStatus } from "./CurrentUserStatus";
-
-const handleSubmit = (e: React.SyntheticEvent) => {
-  e.preventDefault();
-  // NOTE: fetching data from the api
-  console.log("looking from actor/movie/director");
-};
+import queryString from "query-string";
 
 interface HeaderVariantsProps {}
 
 const AppHeaderDefault = (props: HeaderVariantsProps) => {
+  const [inputVal, setInputVal] = useState("");
   let history = useHistory();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const params = queryString.stringify({ search_phrase: inputVal });
+    history.push(`/ranking/${params}`);
+    setInputVal("");
+  };
 
   return (
     <Box bgColor="red.300" height="80px" width="100%">
@@ -56,13 +59,15 @@ const AppHeaderDefault = (props: HeaderVariantsProps) => {
           </Button>
           <Box></Box>
           <form onSubmit={handleSubmit}>
-            <FormControl onSubmit={handleSubmit}>
+            <FormControl>
               <InputGroup>
                 <Input
                   autoComplete="false"
                   bgColor="white"
                   type="text"
                   placeholder="find movie"
+                  value={inputVal}
+                  onChange={(e) => setInputVal(e.target.value)}
                 />
                 <InputRightElement paddingRight="4">
                   <Button type="submit" h="1.75rem">
@@ -82,6 +87,13 @@ const AppHeaderDefault = (props: HeaderVariantsProps) => {
 const AppHeaderSmall = (props: HeaderVariantsProps) => {
   let history = useHistory();
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const searchPhrase = (e.currentTarget[0] as any).value;
+    const params = queryString.stringify({ search_phrase: searchPhrase });
+    history.push(`/ranking/${params}`);
+  };
+
   return (
     <Box bgColor="red.300" minH="80px" width="100%">
       <VStack>
@@ -100,12 +112,12 @@ const AppHeaderSmall = (props: HeaderVariantsProps) => {
           onSubmit={handleSubmit}
           style={{ width: "100%", padding: "10px" }}
         >
-          <FormControl onSubmit={handleSubmit}>
+          <FormControl>
             <InputGroup>
               <Input
                 autoComplete="false"
                 bgColor="white"
-                type="text"
+                type="reset"
                 placeholder="find movie"
               />
               <InputRightElement paddingRight="4">
