@@ -21,9 +21,10 @@ export const AppRouter = (props: Props) => {
     >
       <Switch>
         <Route exact path={["/", "/home"]} component={HomePage} />
-        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/login/:success" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/ranking" component={RankingPage} />
+        <Route path="/ranking/:args" component={RankingPage} />
         <Route
           exact
           path="/invalid-auth-token"

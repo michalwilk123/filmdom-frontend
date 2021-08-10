@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useLocalStorage } from "@rehooks/local-storage";
 import React, { ReactElement, useEffect } from "react";
+import { useParams } from "react-router";
 import { getAuthToken } from "../../utils/apiConnector";
 
 interface Props {
@@ -18,6 +19,8 @@ interface Props {
 export const LoginPage = (props: Props): ReactElement => {
   const [, setToken, deleteToken] = useLocalStorage("auth_token");
   const [, setUserId, deleteUserId] = useLocalStorage("user_id");
+  const { success } = useParams<{ success?: string | undefined }>();
+
   // TODO: plug this into the website
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +63,7 @@ export const LoginPage = (props: Props): ReactElement => {
       rounded="lg"
       flexDirection="column"
     >
-      {props.fresh_register && (
+      {success && (
         <Alert status="success" variant="subtle">
           <AlertIcon />
           Registration was successful!
