@@ -101,15 +101,12 @@ export const MovieCard = (props: Props): React.ReactElement => {
           </p>
           <Flex>
             <p style={{ marginTop: "auto", marginBottom: "auto" }}>
-              <button onClick={CommentModalDisclosure.onOpen}>
-                <b>Comments</b>
-              </button>
+              <Button onClick={CommentModalDisclosure.onOpen} color="white" bgColor="red.300">
+                Comments
+              </Button>
             </p>
-            {props.args.allowCommenting && authToken !== null && (
+            {props.args.allowCommenting && authToken && (
               <Button
-                p="0"
-                my="0"
-                maxH="25px"
                 ml="2"
                 onClick={AddCommentModalDisclosure.onOpen}
                 bgColor="red.300"
