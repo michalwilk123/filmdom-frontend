@@ -25,6 +25,7 @@ import {
   ResponseListElement,
 } from "../utils/commonIterfaces";
 import { useWindowDimensions } from "../utils/customHooks";
+import { flattenDict } from "../utils/other";
 import { MovieCard } from "./ranking/MovieCard";
 
 interface Props extends StackProps {
@@ -46,7 +47,7 @@ export const RandomMoviesFeed = (props: Props) => {
   }, [currentPageNum]);
 
   const fetchRandomMovies = (): void => {
-    let movieGenres: string[];
+    let movieGenres: { [key: string]: string };
     let movieActors: string[];
     let movieList: MovieListElement[] = [];
 
@@ -61,19 +62,13 @@ export const RandomMoviesFeed = (props: Props) => {
       ])
       .then(
         axios.spread((genreRes, actorRes, movieRes) => {
-          genreRes.data.sort(
-            (a: ResponseListElement, b: ResponseListElement) => a.id - b.id
-          );
-          actorRes.data.sort(
-            (a: ResponseListElement, b: ResponseListElement) => a.id - b.id
-          );
-
-          movieGenres = genreRes.data.map((x: ResponseListElement) => x.name);
+          movieGenres = flattenDict(genreRes.data);
           movieActors = actorRes.data.map((x: ResponseListElement) => x.name);
           movieList = movieRes.data.results.map((x: any) => dispatchMovie(x));
           movieList
             .map((e) => dispatchMovieGenres(e, movieGenres))
             .map((e) => dispatchMovieActors(e, movieActors));
+          console.log(movieList);
           setNextPage(movieRes.data.next);
           setPrevPage(movieRes.data.previous);
           setRandomMovieList(movieList);

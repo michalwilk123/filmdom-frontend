@@ -18,7 +18,7 @@ import { useWindowDimensions } from "../../utils/customHooks";
 import { MovieCard } from "./MovieCard";
 import { MovieFilterFeed } from "./MovieFilterFeed";
 import queryString from "query-string";
-import { sortMethodStringToEnum } from "../../utils/other";
+import { flattenDict, sortMethodStringToEnum } from "../../utils/other";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 export const RankingPage = (): ReactElement => {
@@ -45,14 +45,14 @@ export const RankingPage = (): ReactElement => {
         (fetchParams.searchPhrase = urlParams.search_phrase);
     }
     fetchRanking(fetchParams);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [args, currentPageNum]);
 
   const fetchRanking = (args: {
     sort_method?: MovieSortMethods;
     searchPhrase?: string;
   }): MovieListElement[] => {
-    let movieGenres: string[];
+    let movieGenres: { [key: string]: string };
     let movieActors: string[];
     let movieList: MovieListElement[] = [];
 
@@ -68,10 +68,10 @@ export const RankingPage = (): ReactElement => {
       ])
       .then(
         axios.spread((genreRes, actorRes, movieRes) => {
-          movieGenres = genreRes.data;
+          movieGenres = flattenDict(genreRes.data);
           movieActors = actorRes.data;
           movieList = movieRes.data.results.map((x: any) => dispatchMovie(x));
-          movieList
+          movieList = movieList
             .map((e) => dispatchMovieGenres(e, movieGenres))
             .map((e) => dispatchMovieActors(e, movieActors));
           setNextPage(movieRes.data.next);
@@ -114,7 +114,7 @@ export const RankingPage = (): ReactElement => {
             );
           })}
         </VStack>
-        <Spacer/>
+        <Spacer />
         {(nextPage || prevPage) && (
           <Flex width="inherit" justifyContent="center" backgroundColor="white">
             <ButtonGroup mb="10px" p="1px">

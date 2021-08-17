@@ -85,32 +85,38 @@ export const MovieCard = (props: Props): React.ReactElement => {
             <b>Rating: </b> {getStarString(props.movie.avgRating)}
           </p>
           <p>
-            <b>Director: </b> {props.movie.director}
+            <b>Premiere date: </b> {props.movie.produceDate}
           </p>
           <p>
-            <b>Premiere date: </b> {props.movie.produceDate}
+            <Text as="b">
+              Genres: <Text as="span" fontSize="sm">{props.movie.genres.join("/ ")}</Text>
+            </Text>
           </p>
           <Flex>
             <p style={{ marginTop: "auto", marginBottom: "auto" }}>
               <button onClick={CommentModalDisclosure.onOpen}>
-                <b>Comments ({props.movie.noOfComments})</b>
+                <b>Comments</b>
               </button>
             </p>
             {props.args.allowCommenting && authToken !== null && (
               <Button
                 p="0"
-                my="1"
+                my="0"
                 maxH="25px"
-                ml="5"
+                ml="2"
                 onClick={AddCommentModalDisclosure.onOpen}
+                bgColor="red.300"
+                color="white"
               >
                 <AddIcon boxSize={3} />
               </Button>
             )}
           </Flex>
-          <Text pt="2" as="i" fontSize="md">
-            {props.movie.description}
-          </Text>
+          <Box maxH="110px" overflow="auto" bgColor="gray.100" mt="1" py="1" px="2">
+            <Text as="i" fontSize="sm">
+              {props.movie.description}
+            </Text>
+          </Box>
         </Box>
       </Flex>
       <CommentModal
@@ -123,9 +129,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
       <AddMovieCommentModal
         isOpen={AddCommentModalDisclosure.isOpen}
         onClose={AddCommentModalDisclosure.onClose}
-        signature={{
-          username: "Tomek",
-        }}
+        args={{ movieId: props.movie.id }}
       />
     </>
   );

@@ -16,15 +16,13 @@ export const dispatchMovie = (movieData: any): MovieListElement => {
 
 export const dispatchMovieGenres = (
   movieElement: MovieListElement,
-  genreList: string[]
+  genreList: { [key: string]: string }
 ): MovieListElement => {
-  movieElement.genres.map((g) => {
-    if (typeof g === "string") {
-      // eslint-disable-next-line no-throw-literal
-      throw "error";
-    }
-    return genreList[g - 1];
+  let genres = movieElement.genres.map((g) => {
+    return genreList[g];
   });
+  movieElement.genres = genres;
+  console.log(movieElement);
   return movieElement;
 };
 
@@ -32,7 +30,7 @@ export const dispatchMovieActors = (
   movieElement: MovieListElement,
   actorList: string[]
 ): MovieListElement => {
-  movieElement.genres.map((g) => {
+  movieElement.actors.map((g) => {
     if (typeof g === "string") {
       // eslint-disable-next-line no-throw-literal
       throw "error";

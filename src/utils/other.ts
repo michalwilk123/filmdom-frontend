@@ -87,3 +87,13 @@ export const sortMethodStringToEnum = (method: string): MovieSortMethods => {
       throw sortMethodException;
   }
 };
+
+export const flattenDict = (
+  dict: { id: string; name: string }[]
+): { [key: string]: string } => {
+  let result: { [key: string]: string } = {};
+  for (let idx in dict) {
+    result[dict[idx].id] = dict[idx].name;
+  }
+  return result;
+};
