@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { InvalidAuthTokenPage } from "./components/authorizationRelated/InvalidAuthTokenPage";
 import { LoginPage } from "./components/authorizationRelated/LoginPage";
 import RegisterPage from "./components/authorizationRelated/RegisterPage";
+import { SimpleAdminPage } from "./components/authorizationRelated/SimpleAdminPage";
 import { HomePage } from "./components/HomePage";
 import { RankingPage } from "./components/ranking/RankingPage";
 import PageNotFound from "./components/special/PageNotFound";
@@ -26,6 +27,7 @@ export const AppRouter = (props: Props) => {
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/ranking" component={RankingPage} />
         <Route path="/ranking/:args" component={RankingPage} />
+        <Route path="/admin" component={SimpleAdminPage} />
         <Route
           exact
           path="/invalid-auth-token"
