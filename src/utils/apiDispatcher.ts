@@ -5,6 +5,7 @@ export const dispatchMovie = (movieData: any): MovieListElement => {
     id: movieData.id,
     title: movieData.title,
     thumbnail: movieData.thumbnail,
+    remote_thumbnail: movieData.remote_thumbnail,
     description: movieData.text,
     director: movieData.director_name,
     avgRating: movieData.average_rating,
@@ -22,7 +23,6 @@ export const dispatchMovieGenres = (
     return genreList[g];
   });
   movieElement.genres = genres;
-  console.log(movieElement);
   return movieElement;
 };
 

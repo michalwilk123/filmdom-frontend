@@ -32,6 +32,7 @@ export const MovieCard = (props: Props): React.ReactElement => {
   const CommentModalDisclosure = useDisclosure();
   const AddCommentModalDisclosure = useDisclosure();
   const [authToken] = useLocalStorage("auth_token");
+  const [displayUnsafe] = useLocalStorage("display_unsafe");
 
   const getThumbnail = (): React.ReactElement => {
     if (!props.args.showthumbnail) {
@@ -45,6 +46,10 @@ export const MovieCard = (props: Props): React.ReactElement => {
     } else {
       imgSrc = props.movie.thumbnail;
     }
+
+    if (displayUnsafe?.toString() === "true"){
+      imgSrc = props.movie.remote_thumbnail;
+    } 
 
     return (
       <Image
@@ -63,7 +68,6 @@ export const MovieCard = (props: Props): React.ReactElement => {
     }
     return convertRatingToStar(val, 5);
   };
-  console.log("auth token" + authToken);
 
   return (
     <>
@@ -89,7 +93,10 @@ export const MovieCard = (props: Props): React.ReactElement => {
           </p>
           <p>
             <Text as="b">
-              Genres: <Text as="span" fontSize="sm">{props.movie.genres.join("/ ")}</Text>
+              Genres:{" "}
+              <Text as="span" fontSize="sm">
+                {props.movie.genres.join("/ ")}
+              </Text>
             </Text>
           </p>
           <Flex>
@@ -112,7 +119,14 @@ export const MovieCard = (props: Props): React.ReactElement => {
               </Button>
             )}
           </Flex>
-          <Box maxH="110px" overflow="auto" bgColor="gray.100" mt="1" py="1" px="2">
+          <Box
+            maxH="110px"
+            overflow="auto"
+            bgColor="gray.100"
+            mt="1"
+            py="1"
+            px="2"
+          >
             <Text as="i" fontSize="sm">
               {props.movie.description}
             </Text>
