@@ -70,7 +70,6 @@ export const getMovies = async (
         break;
     }
   }
-  console.log(params);
   params && params.searchPhrase && (data.title_like = params.searchPhrase);
 
   return axios.get(`${process.env.REACT_APP_DOMAIN}movies/`, { params: data });

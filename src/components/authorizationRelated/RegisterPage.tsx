@@ -24,7 +24,6 @@ export default function RegisterPage(): ReactElement {
 
   useEffect(() => {
     if (passw.length < 8) {
-      console.log("length too small");
       setRegiDataInvalid(true);
       return;
     }
@@ -34,7 +33,6 @@ export default function RegisterPage(): ReactElement {
      */
     const re = /.*[^a-zA-Z\n]+.*[^a-zA-Z\n]+.*/g;
     if (passw.match(re) == null) {
-      console.log("password invalid: " + passw + " " + passw.match(re));
       setRegiDataInvalid(true);
       return;
     }
@@ -66,7 +64,6 @@ export default function RegisterPage(): ReactElement {
         console.log(e);
       });
 
-    console.log(`${process.env.REACT_APP_DOMAIN}users/`);
   };
 
   const inputFormDispatcher = (

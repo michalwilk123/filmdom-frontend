@@ -68,7 +68,6 @@ export const RandomMoviesFeed = (props: Props) => {
           movieList
             .map((e) => dispatchMovieGenres(e, movieGenres))
             .map((e) => dispatchMovieActors(e, movieActors));
-          console.log(movieList);
           setNextPage(movieRes.data.next);
           setPrevPage(movieRes.data.previous);
           setRandomMovieList(movieList);

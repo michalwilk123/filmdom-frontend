@@ -14,13 +14,14 @@ export const MovieFilterFeed = (props: Props): ReactElement => {
 
   const onSortTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     let queryArgs;
-    if (args){
+    if (args) {
       queryArgs = {
-        ...queryString.parse(args), sort_method: e.target.value 
+        ...queryString.parse(args),
+        sort_method: e.target.value,
       };
     } else {
       queryArgs = {
-        sort_method: e.target.value 
+        sort_method: e.target.value,
       };
     }
     history.push(`/ranking/${queryString.stringify(queryArgs)}`);
@@ -35,9 +36,11 @@ export const MovieFilterFeed = (props: Props): ReactElement => {
         onChange={onSortTypeChange}
         width="250px"
       >
-        {Object.values(MovieSortMethods).filter((m) => m !== "random").map((method) => (
-          <option key={method}>{method}</option>
-        ))}
+        {Object.values(MovieSortMethods)
+          .filter((m) => m !== "random")
+          .map((method) => (
+            <option key={method}>{method}</option>
+          ))}
       </Select>
     </Flex>
   );
