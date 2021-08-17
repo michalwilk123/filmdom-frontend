@@ -1,26 +1,20 @@
 import { Checkbox, HStack, StackProps, VStack } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
+import { getMovieGenres } from "../../utils/apiConnector";
 import { arrReshape } from "../../utils/other";
-
-const testGenreList = [
-  "horror",
-  "drama",
-  "comedy",
-  "action",
-  "romance",
-  "science-fiction",
-];
 
 interface Props extends StackProps {
   cols: number;
 }
 
 export const MovieGenreSelector = (props: Props): ReactElement => {
-  const [genreList, setGenreList] = useState<string[]>(testGenreList);
+  const [genreList, setGenreList] = useState<string[]>([]);
 
   useEffect(() => {
     // NOTE: Should fetch here genre data
-    setGenreList(testGenreList);
+    getMovieGenres().then((response)=>{
+      setGenreList(response.data.map((val:{id:string, name:string})=>{return val.name}));
+    }).catch((error)=>{console.log(error)})
   }, []);
 
   return (
