@@ -48,7 +48,7 @@ export const AppFooter = () => {
             >
               <Box pl="6">
                 <Text as="b">Unsafe mode</Text>
-                <Switch defaultChecked={displayUnsafe === "true"} colorScheme="red" pl="3" onChange={toggleImageUnsafeMode}/>
+                <Switch defaultChecked={displayUnsafe?.toString() === "true"} colorScheme="red" pl="3" onChange={toggleImageUnsafeMode}/>
               </Box>
             </Tooltip>
           </Flex>
