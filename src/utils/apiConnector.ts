@@ -156,7 +156,7 @@ export const getMovieActors = async (): Promise<AxiosResponse> => {
 };
 
 export const getMovieDirectors = async (): Promise<AxiosResponse> => {
-  return axios.get(`${process.env.REACT_APP_DOMAIN}actors/`);
+  return axios.get(`${process.env.REACT_APP_DOMAIN}directors/`);
 };
 
 // very important endpoint
@@ -164,4 +164,33 @@ export const getMovieDirectors = async (): Promise<AxiosResponse> => {
 // will search thoughout directors, actors and movies
 export const findQuery = async (): Promise<AxiosResponse> => {
   return axios.get(`${process.env.REACT_APP_DOMAIN}search-phrase/`);
+};
+
+// ADMIN ONLY OPERATIONS
+export const createMovieGenres = async (name:string, adminToken:string): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}genres/`, {name:name});
+};
+
+export const createMovieActors = async (name:string, adminToken:string): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}actors/`, {name:name});
+};
+
+export const createMovieDirectors = async (name:string, adminToken:string): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}directors/`, {name:name});
+};
+
+
+interface CreateMovieParams {
+  title: string;
+  thumbnail?: string;
+  remote_thumbnail?: string;
+  description?: string;
+  director?: string;
+  produceDate: string; 
+  genres: number[];
+  actors: number[];
+}
+
+export const createMovie = async (movie:CreateMovieParams, adminToken:string): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}movies/`, {});
 };

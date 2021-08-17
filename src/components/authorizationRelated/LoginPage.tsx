@@ -19,6 +19,7 @@ interface Props {
 export const LoginPage = (props: Props): ReactElement => {
   const [, setToken, deleteToken] = useLocalStorage("auth_token");
   const [, setUserId, deleteUserId] = useLocalStorage("user_id");
+  const [, setIsSuperuser, deleteIsSuperuser] = useLocalStorage("is_superuser");
   const { success } = useParams<{ success?: string | undefined }>();
 
   // TODO: plug this into the website
@@ -35,6 +36,7 @@ export const LoginPage = (props: Props): ReactElement => {
       .then((response) => {
         setToken(response.data.token);
         setUserId(response.data.user_id);
+        setIsSuperuser(response.data.is_superuser);
       })
       .catch((error) => {
         if (error.response) {
@@ -51,10 +53,12 @@ export const LoginPage = (props: Props): ReactElement => {
         }
       });
   };
+
   useEffect(() => {
     deleteToken();
     deleteUserId();
-  }, [deleteToken, deleteUserId]);
+    deleteIsSuperuser();
+  }, [deleteToken, deleteUserId, deleteIsSuperuser]);
 
   return (
     <Flex

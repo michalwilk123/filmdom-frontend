@@ -2,7 +2,7 @@ export interface MovieListElement {
   id: number;
   title: string;
   thumbnail: string | null; // url or no photo
-  remote_thumbnail: string;
+  remote_thumbnail?: string;
   description: string;
   director: string;
   avgRating: number; // best/worst
