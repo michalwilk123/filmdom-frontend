@@ -167,30 +167,65 @@ export const findQuery = async (): Promise<AxiosResponse> => {
 };
 
 // ADMIN ONLY OPERATIONS
-export const createMovieGenres = async (name:string, adminToken:string): Promise<AxiosResponse> => {
-  return axios.post(`${process.env.REACT_APP_DOMAIN}genres/`, {name:name});
+export const createMovieGenres = async (
+  name: string,
+  adminToken: string
+): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}genres/`, { name: name });
 };
 
-export const createMovieActors = async (name:string, adminToken:string): Promise<AxiosResponse> => {
-  return axios.post(`${process.env.REACT_APP_DOMAIN}actors/`, {name:name});
+export const createMovieActors = async (
+  name: string,
+  adminToken: string
+): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}actors/`, { name: name });
 };
 
-export const createMovieDirectors = async (name:string, adminToken:string): Promise<AxiosResponse> => {
-  return axios.post(`${process.env.REACT_APP_DOMAIN}directors/`, {name:name});
+export const createMovieDirectors = async (
+  name: string,
+  adminToken: string
+): Promise<AxiosResponse> => {
+  return axios.post(`${process.env.REACT_APP_DOMAIN}directors/`, {
+    name: name,
+  });
 };
-
 
 interface CreateMovieParams {
   title: string;
-  thumbnail?: string;
+  thumbnail?: File;
   remote_thumbnail?: string;
   description?: string;
   director?: string;
-  produceDate: string; 
+  produceDate: string;
   genres: number[];
   actors: number[];
 }
 
-export const createMovie = async (movie:CreateMovieParams, adminToken:string): Promise<AxiosResponse> => {
-  return axios.post(`${process.env.REACT_APP_DOMAIN}movies/`, {});
+export const createMovie = async (
+  movie: CreateMovieParams,
+  adminToken: string
+): Promise<void> => {
+  // axios and django do not accept Array parameters
+  // (genres, actors) inside formdata.
+  // To bypass this, i am generating new PUT request to
+  // add additional data in JSON format
+  let formData = new FormData();
+
+  formData.append("title", movie.title);
+  formData.append("produce_date", movie.produceDate);
+  movie.thumbnail && formData.append("thumbnail", movie.thumbnail);
+  movie.remote_thumbnail &&
+    formData.append("thumbnail", movie.remote_thumbnail);
+  movie.description && formData.append("description", movie.description);
+  movie.director && formData.append("director ", movie.director);
+
+  const authHeader = { Authorization: `Token ${adminToken}` };
+  const url = `${process.env.REACT_APP_DOMAIN}movies/`;
+
+  let res = await axios.post(url, formData, { headers: authHeader });
+
+  await axios.patch(`${url}${res.data.id}/`, {
+    genres: movie.genres,
+    actors: movie.actors,
+  }, { headers: authHeader });
 };
