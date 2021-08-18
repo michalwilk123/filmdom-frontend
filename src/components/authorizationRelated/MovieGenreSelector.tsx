@@ -1,4 +1,11 @@
-import { Checkbox, HStack, StackProps, VStack } from "@chakra-ui/react";
+import {
+  Checkbox,
+  HStack,
+  StackProps,
+  VStack,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
 import { getMovieGenres } from "../../utils/apiConnector";
 import { arrReshape } from "../../utils/other";
@@ -8,30 +15,38 @@ interface Props extends StackProps {
 }
 
 export const MovieGenreSelector = (props: Props): ReactElement => {
-  const [genreList, setGenreList] = useState<string[]>([]);
+  const [genreList, setGenreList] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
 
   useEffect(() => {
     // NOTE: Should fetch here genre data
-    getMovieGenres().then((response)=>{
-      setGenreList(response.data.map((val:{id:string, name:string})=>{return val.name}));
-    }).catch((error)=>{console.log(error)})
+    getMovieGenres()
+      .then((response) => {
+        setGenreList(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
     <VStack {...props}>
-      {arrReshape(genreList, props.cols).map((row: string[]) => {
-        // TODO: this breaks with long genre names and I
-        // dont know how to solve it
-        return (
-          <HStack key={row.toString()} spacing="5">
-            {row.map((genreName) => (
-              <Checkbox id={genreName} key={genreName}>
-                {genreName}
+      <Wrap>
+        {genreList.map((elem) => {
+          return (
+            <WrapItem>
+              <Checkbox
+                key={elem.id.toString()}
+                id={elem.id.toString()}
+                value={elem.id.toString()}
+              >
+                {elem.name}
               </Checkbox>
-            ))}
-          </HStack>
-        );
-      })}
+            </WrapItem>
+          );
+        })}
+      </Wrap>
     </VStack>
   );
 };
